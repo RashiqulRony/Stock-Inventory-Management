@@ -11,7 +11,7 @@
 <script>
 export default {
     mounted() {
-        this.$swal('Hello Vue world!!!');
+        this.$helper.successAlert('ddddddddddddddd')
     }
 }
 </script>

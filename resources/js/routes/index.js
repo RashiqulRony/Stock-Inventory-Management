@@ -9,6 +9,7 @@ import Footer          from '../components/share/Footer';
 import NotFound       from '../components/NotFound'
 
 import Dashboard       from '../components/Dashboard'
+import Profile       from '../components/Profile'
 
 
 const router =  new Router({
@@ -35,6 +36,16 @@ const router =  new Router({
                 'footer': Footer,
             },
             meta: {requiresAuth: true, title: 'Dashboard'}
+        },
+        {
+            path: "/profile",
+            name: "Profile",
+            components: {
+                'default': Profile,
+                'header': Header,
+                'footer': Footer,
+            },
+            meta: {requiresAuth: true, title: 'Profile'}
         },
         {
             path: "/:catchAll(.*)",
