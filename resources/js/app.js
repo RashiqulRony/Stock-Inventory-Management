@@ -15,6 +15,7 @@ window.Api = Api;
 var parts = location.hostname.split('.');
 var domainName = parts.shift();
 Vue.prototype.domainName = domainName;
+Vue.prototype.mainDomain = location.hostname;
 Vue.use(VueSweetalert2);
 
 Vue.use({

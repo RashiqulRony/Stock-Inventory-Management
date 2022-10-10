@@ -5,7 +5,7 @@ if (authInfo === 'undefined') {
 
 export default {
     state: {
-        authInfo: authInfo ? JSON.parse(authInfo).user : null,
+        authInfo: authInfo ? JSON.parse(authInfo) : null,
         accessToken: localStorage.getItem("accessToken"),
         isLoggedIn: authInfo !== null,
         headers: { Authorization: 'Bearer ' + localStorage.getItem("accessToken") },
@@ -31,8 +31,12 @@ export default {
         }
     },
     mutations: {
+        PROFILE_UPDATE: (state, resData) => {
+            localStorage.setItem("authInfo", JSON.stringify(resData.user));
+            state.authInfo = resData.user;
+        },
         LOGIN_SUCCESS: (state, rqsData) => {
-            localStorage.setItem("authInfo", JSON.stringify(rqsData));
+            localStorage.setItem("authInfo", JSON.stringify(rqsData.user));
             localStorage.setItem("accessToken", rqsData.token);
             state.isLoggedIn = true;
             state.authInfo = rqsData;
@@ -47,6 +51,23 @@ export default {
         },
     },
     actions: {
+        profileUpdate(context, formData) {
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            };
+            return axios.post(Api.common.profile, formData, { headers: store.getters.headers, config })
+                .then((response) => {
+                  if (response.data.status === true) {
+                      context.commit("PROFILE_UPDATE", response.data);
+                      return Promise.resolve(response);
+                  } else {
+                      return response.data;
+                  }
+                })
+                .catch((error) => {
+                    return Promise.reject(error);
+                });
+        },
         login(context, credentials) {
             return axios.post(Api.auth.login, credentials)
                 .then((response) => {

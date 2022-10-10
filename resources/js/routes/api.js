@@ -9,5 +9,9 @@ export default {
         logout       : `${apiUrl}/logout`,
     },
 
-    profile: `${apiUrl}/profile-update`
+    common: {
+        profile : `${apiUrl}/profile-update`
+    },
+
+
 };

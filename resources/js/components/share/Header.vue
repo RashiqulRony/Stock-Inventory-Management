@@ -950,18 +950,20 @@
                                     </div>
                                 </li>
                                 <li class="nav-item nav-icon dropdown caption-content">
-                                    <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="assets/images/user/1.png" class="img-fluid rounded" alt="user">
+                                    <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img v-if="$store.getters.authUser.avatar" :src="'/storage/'+this.domainName+'/'+$store.getters.authUser.avatar" class="img-fluid rounded" :alt="$store.getters.authUser.name">
+                                        <img v-else :src="'/assets/images/user/1.png'" class="img-fluid rounded" alt="user">
                                     </a>
                                     <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <div class="card shadow-none m-0">
                                             <div class="card-body p-0 text-center">
                                                 <div class="media-body profile-detail text-center">
-                                                    <img src="assets/images/page-img/profile-bg.jpg" alt="profile-bg"
-                                                         class="rounded-top img-fluid mb-4">
-                                                    <img src="assets/images/user/1.png" alt="profile-img"
-                                                         class="rounded profile-img img-fluid avatar-70">
+                                                    <img src="assets/images/page-img/profile-bg.jpg" alt="profile-bg" class="rounded-top img-fluid mb-4">
+                                                    <template>
+                                                        <img v-if="$store.getters.authUser.avatar" :src="'/storage/'+this.domainName+'/'+$store.getters.authUser.avatar" alt="profile-img" class="rounded profile-img img-fluid avatar-70">
+                                                        <img v-else :src="'/assets/images/user/1.png'" alt="profile-img" class="rounded profile-img img-fluid avatar-70">
+                                                    </template>
+
                                                 </div>
                                                 <div class="p-3">
                                                     <h5 class="mb-1">{{ $store.getters.authUser.name }}</h5>
@@ -1010,7 +1012,8 @@
 <script>
     export default {
         mounted() {
-
+            console.log(5555)
+            console.log(this.$store.getters.authUser)
         },
 
         methods:{

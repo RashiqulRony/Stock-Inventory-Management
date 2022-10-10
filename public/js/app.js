@@ -5348,8 +5348,90 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {
-    this.$helper.successAlert('ddddddddddddddd');
+  data: function data() {
+    return {
+      user: {
+        domain: this.domainName,
+        name: this.$store.getters.authUser.name,
+        email: this.$store.getters.authUser.email,
+        phone: this.$store.getters.authUser.phone,
+        address: this.$store.getters.authUser.address
+      },
+      errors: []
+    };
+  },
+  mounted: function mounted() {},
+  methods: {
+    profileUpdate: function profileUpdate() {
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var postData = new FormData();
+      var avatar = document.getElementById("avatar").files[0];
+
+      if (avatar !== undefined) {
+        if (avatar.type === 'image/jpeg' || avatar.type === 'image/png' || avatar.type === 'image/webp' || avatar.type === 'image/gif') {
+          postData.append('avatar', avatar);
+        } else {
+          alert('This file is not an image');
+        }
+      }
+
+      var logo = document.getElementById("logo").files[0];
+
+      if (logo !== undefined) {
+        if (logo.type === 'image/jpeg' || logo.type === 'image/png' || logo.type === 'image/webp' || logo.type === 'image/gif') {
+          postData.append('logo', logo);
+        } else {
+          alert('This file is not an image');
+        }
+      }
+
+      postData.append('domain', this.user.domain);
+      postData.append('name', this.user.name);
+      postData.append('email', this.user.email);
+      postData.append('phone', this.user.phone);
+      postData.append('address', this.user.address);
+      this.$store.dispatch("profileUpdate", postData).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      /*axios.post(Api.common.profile, postData, { headers: store.getters.headers, config })
+          .then((response) => response.data)
+          .then((response) => {
+              if (response.status === true) {
+                  this.alertMessage('success', response.message)
+              } else {
+                  this.errors = response.errors;
+                  console.log(this.errors)
+                  this.alertMessage('error', 'Something went wrong. Required all fields')
+              }
+          })
+          .catch((error) => {
+              console.log(error);
+              this.alertMessage('error', 'Something went wrong. Please try again!!')
+          });
+      */
+    },
+    alertMessage: function alertMessage(type, message) {
+      this.$swal.fire({
+        toast: true,
+        icon: type,
+        title: message,
+        animation: false,
+        position: 'top-right',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: function didOpen(toast) {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        }
+      });
+    }
   }
 });
 
@@ -5441,7 +5523,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    console.log(5555);
+    console.log(this.$store.getters.authUser);
+  },
   methods: {
     logout: function logout() {
       var _this = this;
@@ -6113,7 +6198,184 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
+  return _c("div", {
+    staticClass: "content-page"
+  }, [_c("div", {
+    staticClass: "container-fluid"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6 col-sm-12 col-lg-6"
+  }, [_c("div", {
+    staticClass: "card"
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("form", {
+    staticClass: "form-horizontal",
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.profileUpdate();
+      }
+    }
+  }, [_c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "domain"
+    }
+  }, [_vm._v("Domain:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
+  }, [_c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      readonly: "",
+      disabled: "",
+      id: "domain",
+      placeholder: "Enter your name"
+    },
+    domProps: {
+      value: this.mainDomain
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Name:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.user.name,
+      expression: "user.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      id: "name",
+      placeholder: "Enter your name"
+    },
+    domProps: {
+      value: _vm.user.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+
+        _vm.$set(_vm.user, "name", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _vm.errors.name ? _c("span", {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.errors.name[0]))]) : _vm._e()])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "email"
+    }
+  }, [_vm._v("Email:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.user.email,
+      expression: "user.email"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "email",
+      id: "email",
+      placeholder: "Enter your email"
+    },
+    domProps: {
+      value: _vm.user.email
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+
+        _vm.$set(_vm.user, "email", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _vm.errors.email ? _c("span", {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.errors.email[0]))]) : _vm._e()])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "phone"
+    }
+  }, [_vm._v("Phone:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.user.phone,
+      expression: "user.phone"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      id: "phone",
+      placeholder: "Enter your phone number"
+    },
+    domProps: {
+      value: _vm.user.phone
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+
+        _vm.$set(_vm.user, "phone", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _vm.errors.phone ? _c("span", {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.errors.phone[0]))]) : _vm._e()])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "logo"
+    }
+  }, [_vm._v("Address:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
+  }, [_c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.user.address,
+      expression: "user.address"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      rows: "3",
+      id: "address",
+      placeholder: "Enter your full address"
+    },
+    domProps: {
+      value: _vm.user.address
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+
+        _vm.$set(_vm.user, "address", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _vm.errors.address ? _c("span", {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.errors.address[0]))]) : _vm._e()])]), _vm._v(" "), _vm._m(3)])])])]), _vm._v(" "), _vm._m(4)])])]);
 };
 
 var staticRenderFns = [function () {
@@ -6121,12 +6383,169 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "content-page"
+    staticClass: "card-header d-flex justify-content-between"
   }, [_c("div", {
-    staticClass: "container-fluid"
+    staticClass: "header-title"
+  }, [_c("h4", {
+    staticClass: "card-title"
+  }, [_vm._v("Profile Update")])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "avatar"
+    }
+  }, [_vm._v("Profile Picture:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
   }, [_c("div", {
-    staticClass: "row"
-  }, [_c("h1", [_vm._v("Profile")])])])]);
+    staticClass: "input-group"
+  }, [_c("div", {
+    staticClass: "input-group-prepend"
+  }, [_c("span", {
+    staticClass: "input-group-text"
+  }, [_vm._v("Upload")])]), _vm._v(" "), _c("div", {
+    staticClass: "custom-file"
+  }, [_c("input", {
+    staticClass: "custom-file-input",
+    attrs: {
+      type: "file",
+      accept: "image/*",
+      id: "avatar"
+    }
+  }), _vm._v(" "), _c("label", {
+    staticClass: "custom-file-label selected",
+    attrs: {
+      "for": "avatar"
+    }
+  })])])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "logo"
+    }
+  }, [_vm._v("Logo:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
+  }, [_c("div", {
+    staticClass: "input-group"
+  }, [_c("div", {
+    staticClass: "input-group-prepend"
+  }, [_c("span", {
+    staticClass: "input-group-text"
+  }, [_vm._v("Upload")])]), _vm._v(" "), _c("div", {
+    staticClass: "custom-file"
+  }, [_c("input", {
+    staticClass: "custom-file-input",
+    attrs: {
+      type: "file",
+      accept: "image/*",
+      id: "logo"
+    }
+  }), _vm._v(" "), _c("label", {
+    staticClass: "custom-file-label selected",
+    attrs: {
+      "for": "logo"
+    }
+  })])])])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "form-group"
+  }, [_c("button", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      type: "submit"
+    }
+  }, [_vm._v("Submit")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "col-md-6 col-sm-12 col-lg-6"
+  }, [_c("div", {
+    staticClass: "card"
+  }, [_c("div", {
+    staticClass: "card-header d-flex justify-content-between"
+  }, [_c("div", {
+    staticClass: "header-title"
+  }, [_c("h4", {
+    staticClass: "card-title"
+  }, [_vm._v("Change Password")])])]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("form", {
+    staticClass: "form-horizontal",
+    attrs: {
+      action: ""
+    }
+  }, [_c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "old_password"
+    }
+  }, [_vm._v("Old Password:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
+  }, [_c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "password",
+      id: "old_password",
+      placeholder: "Enter your old password"
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "new_password"
+    }
+  }, [_vm._v("New Password:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
+  }, [_c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "password",
+      id: "new_password",
+      placeholder: "Enter your new password"
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "password_confirmation"
+    }
+  }, [_vm._v("Confirm Password:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
+  }, [_c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "password",
+      id: "password_confirmation",
+      placeholder: "Enter confirm password"
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("button", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      type: "submit"
+    }
+  }, [_vm._v("Submit")])])])])])]);
 }];
 render._withStripped = true;
 
@@ -7560,7 +7979,28 @@ var render = function render() {
     staticClass: "bg-primary"
   })]), _vm._v(" "), _vm._m(22)]), _vm._v(" "), _c("li", {
     staticClass: "nav-item nav-icon dropdown caption-content"
-  }, [_vm._m(23), _vm._v(" "), _c("div", {
+  }, [_c("a", {
+    staticClass: "search-toggle dropdown-toggle",
+    attrs: {
+      href: "#",
+      id: "dropdownMenuButton4",
+      "data-toggle": "dropdown",
+      "aria-haspopup": "true",
+      "aria-expanded": "false"
+    }
+  }, [_vm.$store.getters.authUser.avatar ? _c("img", {
+    staticClass: "img-fluid rounded",
+    attrs: {
+      src: "/storage/" + this.domainName + "/" + _vm.$store.getters.authUser.avatar,
+      alt: _vm.$store.getters.authUser.name
+    }
+  }) : _c("img", {
+    staticClass: "img-fluid rounded",
+    attrs: {
+      src: "/assets/images/user/1.png",
+      alt: "user"
+    }
+  })]), _vm._v(" "), _c("div", {
     staticClass: "iq-sub-dropdown dropdown-menu",
     attrs: {
       "aria-labelledby": "dropdownMenuButton"
@@ -7569,7 +8009,27 @@ var render = function render() {
     staticClass: "card shadow-none m-0"
   }, [_c("div", {
     staticClass: "card-body p-0 text-center"
-  }, [_vm._m(24), _vm._v(" "), _c("div", {
+  }, [_c("div", {
+    staticClass: "media-body profile-detail text-center"
+  }, [_c("img", {
+    staticClass: "rounded-top img-fluid mb-4",
+    attrs: {
+      src: "assets/images/page-img/profile-bg.jpg",
+      alt: "profile-bg"
+    }
+  }), _vm._v(" "), [_vm.$store.getters.authUser.avatar ? _c("img", {
+    staticClass: "rounded profile-img img-fluid avatar-70",
+    attrs: {
+      src: "/storage/" + this.domainName + "/" + _vm.$store.getters.authUser.avatar,
+      alt: "profile-img"
+    }
+  }) : _c("img", {
+    staticClass: "rounded profile-img img-fluid avatar-70",
+    attrs: {
+      src: "/assets/images/user/1.png",
+      alt: "profile-img"
+    }
+  })]], 2), _vm._v(" "), _c("div", {
     staticClass: "p-3"
   }, [_c("h5", {
     staticClass: "mb-1"
@@ -7590,7 +8050,7 @@ var render = function render() {
     on: {
       click: _vm.logout
     }
-  }, [_vm._v("Sign Out")])], 1)])])])])])])])])])])]), _vm._v(" "), _vm._m(25)]);
+  }, [_vm._v("Sign Out")])], 1)])])])])])])])])])])]), _vm._v(" "), _vm._m(23)]);
 };
 
 var staticRenderFns = [function () {
@@ -8568,45 +9028,6 @@ var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("a", {
-    staticClass: "search-toggle dropdown-toggle",
-    attrs: {
-      href: "#",
-      id: "dropdownMenuButton4",
-      "data-toggle": "dropdown",
-      "aria-haspopup": "true",
-      "aria-expanded": "false"
-    }
-  }, [_c("img", {
-    staticClass: "img-fluid rounded",
-    attrs: {
-      src: "assets/images/user/1.png",
-      alt: "user"
-    }
-  })]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "media-body profile-detail text-center"
-  }, [_c("img", {
-    staticClass: "rounded-top img-fluid mb-4",
-    attrs: {
-      src: "assets/images/page-img/profile-bg.jpg",
-      alt: "profile-bg"
-    }
-  }), _vm._v(" "), _c("img", {
-    staticClass: "rounded profile-img img-fluid avatar-70",
-    attrs: {
-      src: "assets/images/user/1.png",
-      alt: "profile-img"
-    }
-  })]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
   return _c("div", {
     staticClass: "modal fade",
     attrs: {
@@ -8692,6 +9113,7 @@ window.Api = _routes_api__WEBPACK_IMPORTED_MODULE_1__["default"];
 var parts = location.hostname.split('.');
 var domainName = parts.shift();
 vue__WEBPACK_IMPORTED_MODULE_6__["default"].prototype.domainName = domainName;
+vue__WEBPACK_IMPORTED_MODULE_6__["default"].prototype.mainDomain = location.hostname;
 vue__WEBPACK_IMPORTED_MODULE_6__["default"].use((vue_sweetalert2__WEBPACK_IMPORTED_MODULE_4___default()));
 vue__WEBPACK_IMPORTED_MODULE_6__["default"].use({
   install: function install() {
@@ -8828,7 +9250,9 @@ var apiUrl = "http://www.roninve.local/api";
     me: "".concat(apiUrl, "/me"),
     logout: "".concat(apiUrl, "/logout")
   },
-  profile: "".concat(apiUrl, "/profile-update")
+  common: {
+    profile: "".concat(apiUrl, "/profile-update")
+  }
 });
 
 /***/ }),
@@ -8960,7 +9384,7 @@ if (authInfo === 'undefined') {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
-    authInfo: authInfo ? JSON.parse(authInfo).user : null,
+    authInfo: authInfo ? JSON.parse(authInfo) : null,
     accessToken: localStorage.getItem("accessToken"),
     isLoggedIn: authInfo !== null,
     headers: {
@@ -8988,8 +9412,12 @@ if (authInfo === 'undefined') {
     }
   },
   mutations: {
+    PROFILE_UPDATE: function PROFILE_UPDATE(state, resData) {
+      localStorage.setItem("authInfo", JSON.stringify(resData.user));
+      state.authInfo = resData.user;
+    },
     LOGIN_SUCCESS: function LOGIN_SUCCESS(state, rqsData) {
-      localStorage.setItem("authInfo", JSON.stringify(rqsData));
+      localStorage.setItem("authInfo", JSON.stringify(rqsData.user));
       localStorage.setItem("accessToken", rqsData.token);
       state.isLoggedIn = true;
       state.authInfo = rqsData;
@@ -9004,6 +9432,26 @@ if (authInfo === 'undefined') {
     }
   },
   actions: {
+    profileUpdate: function profileUpdate(context, formData) {
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      return axios.post(Api.common.profile, formData, {
+        headers: store.getters.headers,
+        config: config
+      }).then(function (response) {
+        if (response.data.status === true) {
+          context.commit("PROFILE_UPDATE", response.data);
+          return Promise.resolve(response);
+        } else {
+          return response.data;
+        }
+      })["catch"](function (error) {
+        return Promise.reject(error);
+      });
+    },
     login: function login(context, credentials) {
       return axios.post(Api.auth.login, credentials).then(function (response) {
         if (response.data.status === true) {
@@ -9032,6 +9480,26 @@ if (authInfo === 'undefined') {
 
 /***/ }),
 
+/***/ "./resources/js/stores/common.js":
+/*!***************************************!*\
+  !*** ./resources/js/stores/common.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {}
+});
+
+/***/ }),
+
 /***/ "./resources/js/stores/index.js":
 /*!**************************************!*\
   !*** ./resources/js/stores/index.js ***!
@@ -9046,7 +9514,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth */ "./resources/js/stores/auth.js");
-/* harmony import */ var _validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./validator */ "./resources/js/stores/validator.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common */ "./resources/js/stores/common.js");
 
 
 
@@ -9055,7 +9523,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_3_
 var store = new vuex__WEBPACK_IMPORTED_MODULE_3__["default"].Store({
   modules: {
     auth: _auth__WEBPACK_IMPORTED_MODULE_0__["default"],
-    validator: _validator__WEBPACK_IMPORTED_MODULE_1__["default"]
+    common: _common__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 }); // For vue 3 --- vuex@next or v4
 
@@ -9073,51 +9541,6 @@ const store = createStore({
 
 export default store
 */
-
-/***/ }),
-
-/***/ "./resources/js/stores/validator.js":
-/*!******************************************!*\
-  !*** ./resources/js/stores/validator.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var validatorStore = {
-  state: {
-    validationErrors: [],
-    serverError: false
-  },
-  getters: {
-    validationErrors: function validationErrors(state) {
-      return state.validationErrors;
-    },
-    serverError: function serverError(state) {
-      return state.serverError;
-    }
-  },
-  mutations: {
-    VALIDATION_ERROR: function VALIDATION_ERROR(state, error) {
-      if (error.response.status === 422) {
-        state.validationErrors = error.response.data.errors;
-      } else if (error.response.status === 401) {
-        state.serverError = error.response.data.message;
-      } else if (error.response.status === 500) {
-        state.serverError = "Sorry Server Error";
-      }
-    },
-    CLEAR_VALIDATION: function CLEAR_VALIDATION(state) {
-      state.validationErrors = [];
-      state.serverError = false;
-    }
-  },
-  actions: {}
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (validatorStore);
 
 /***/ }),
 
