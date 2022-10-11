@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Traits\ImageUpload;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit\Exception;
 
 class CommonController extends Controller
 {
@@ -29,11 +31,13 @@ class CommonController extends Controller
             }
 
             if ($request->hasFile('avatar')) {
-                $file = $this->imageUpload($request->file('avatar'), $user->domain, '', 'avatar');
+                $this->imageAndFileDelete($user->domain, $auth->avatar, '');
+                $file = $this->imageUpload($request->file('avatar'), $user->domain, '');
                 $avatar = $file['name'];
             }
             if ($request->hasFile('logo')) {
-                $file = $this->imageUpload($request->file('logo'), $user->domain, '', 'logo');
+                $this->imageAndFileDelete($user->domain, $auth->logo, '');
+                $file = $this->imageUpload($request->file('logo'), $user->domain, '');
                 $logo = $file['name'];
             }
 
@@ -52,6 +56,43 @@ class CommonController extends Controller
                 'message' => 'Profile update successfully'
             ]);
 
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function changePassword(Request $request) {
+        $rules = [
+            'old_password'      => 'required|min:8|max:20',
+            'password'      => 'required|min:8|max:20|confirmed',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if($validator->fails()) {
+            return response()->json(['status' => false, 'errors'=> $validator->messages()]);
+        }
+
+        try {
+            $user = auth('api')->user();
+
+            if (Hash::check($request->old_password, $user->password)) {
+                User::find($user->id)->update([
+                    'password' => bcrypt($request->password)
+                ]);
+
+                return response()->json([
+                    'status' => true,
+                    'message' => "Your password change successfully."
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Your old password word did not match"
+                ]);
+            }
         } catch (\Exception $exception) {
             return response()->json([
                 'status' => false,

@@ -67,15 +67,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-3 align-self-center" for="logo">Address:</label>
+                                    <label class="control-label col-sm-3 align-self-center" for="address">Address:</label>
                                     <div class="col-sm-9">
                                         <textarea v-model="user.address" class="form-control" rows="3" id="address" placeholder="Enter your full address"></textarea>
                                         <span v-if="errors.address" class="error text-danger">{{ errors.address[0] }}</span>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group text-right">
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </form>
                         </div>
@@ -90,28 +90,30 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form class="form-horizontal" action="">
+                            <form class="form-horizontal" @submit.prevent="changePassword()">
                                 <div class="form-group row">
                                     <label class="control-label col-sm-3 align-self-center" for="old_password">Old Password:</label>
                                     <div class="col-sm-9">
-                                        <input type="password" class="form-control" id="old_password" placeholder="Enter your old password">
+                                        <input type="password" v-model="password.old_password" class="form-control" id="old_password" placeholder="Enter your old password">
+                                        <span v-if="errors.old_password" class="error text-danger">{{ errors.old_password[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-sm-3 align-self-center" for="new_password">New Password:</label>
                                     <div class="col-sm-9">
-                                        <input type="password" class="form-control" id="new_password" placeholder="Enter your new password">
+                                        <input type="password" v-model="password.password" class="form-control" id="new_password" placeholder="Enter your new password">
+                                        <span v-if="errors.password" class="error text-danger">{{ errors.password[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-sm-3 align-self-center" for="password_confirmation">Confirm Password:</label>
                                     <div class="col-sm-9">
-                                        <input type="password" class="form-control" id="password_confirmation" placeholder="Enter confirm password">
+                                        <input type="password" v-model="password.password_confirmation" class="form-control" id="password_confirmation" placeholder="Enter confirm password">
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group text-right">
+                                    <button type="submit" class="btn btn-primary">Change</button>
                                 </div>
                             </form>
                         </div>
@@ -134,19 +136,18 @@ export default {
                 phone: this.$store.getters.authUser.phone,
                 address: this.$store.getters.authUser.address,
             },
+
+            password: {
+                old_password: '',
+                password: '',
+                password_confirmation: '',
+            },
             errors: [],
         };
     },
 
-    mounted() {
-
-    },
-
     methods:{
         profileUpdate() {
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            };
             let postData = new FormData ();
             let avatar = document.getElementById("avatar").files[0];
             if (avatar !== undefined){
@@ -172,30 +173,37 @@ export default {
             postData.append('phone', this.user.phone);
             postData.append('address', this.user.address);
 
-
             this.$store.dispatch("profileUpdate", postData).then(response => {
-                console.log(response)
-
+                if (response.status === 200) {
+                    this.alertMessage('success', response.data.message)
+                } else {
+                    this.alertMessage('error', response.data.message)
+                }
             }).catch(error => {
+                this.alertMessage('error', 'Something went wrong. Please try again')
                 console.log(error)
             });
+        },
 
-            /*axios.post(Api.common.profile, postData, { headers: store.getters.headers, config })
+        changePassword() {
+            axios.post(Api.common.changePassword, this.password, { headers: store.getters.headers })
                 .then((response) => response.data)
                 .then((response) => {
                     if (response.status === true) {
+                        this.password = {
+                            old_password: '',
+                            password: '',
+                            password_confirmation: '',
+                        }
                         this.alertMessage('success', response.message)
                     } else {
-                        this.errors = response.errors;
-                        console.log(this.errors)
-                        this.alertMessage('error', 'Something went wrong. Required all fields')
+                        this.errors = response.errors
                     }
                 })
                 .catch((error) => {
+                    this.alertMessage('error', 'Something went wrong. Please try again')
                     console.log(error);
-                    this.alertMessage('error', 'Something went wrong. Please try again!!')
                 });
-*/
         },
 
         alertMessage(type, message) {
@@ -217,3 +225,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.custom-file-label{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>

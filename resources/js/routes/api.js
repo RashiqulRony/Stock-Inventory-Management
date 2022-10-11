@@ -10,8 +10,13 @@ export default {
     },
 
     common: {
-        profile : `${apiUrl}/profile-update`
+        profile        : `${apiUrl}/profile-update`,
+        changePassword : `${apiUrl}/change-password`
     },
+
+    category    : `${apiUrl}/category`,
+    subcategory : `${apiUrl}/subcategory`,
+    brand       : `${apiUrl}/brand`,
 
 
 };
