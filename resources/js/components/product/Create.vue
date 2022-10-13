@@ -58,6 +58,7 @@
                                         <span v-if="errors.title" class="error text-danger">{{ errors.title[0] }}</span>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <label class="control-label col-sm-3 align-self-center" for="description">Description:</label>
                                     <div class="col-sm-9">
@@ -186,6 +187,7 @@ export default {
         getSubcategory() {
             let item = this.categories.find(item => item.id === this.product.category);
             if (item.subcategories.length > 0) {
+                this.product.subcategory = '';
                 this.subcategories = item.subcategories;
             } else {
                 this.subcategories = [];

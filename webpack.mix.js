@@ -19,6 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
 mix.styles([
     assets+'css/backend-plugin.min.css',
     assets+'css/backende209.css',
+    assets+'css/custom.css',
     assets+'vendor/fortawesome/fontawesome-free/css/all.min.css',
     assets+'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css',
     assets+'vendor/remixicon/remixicon.css',

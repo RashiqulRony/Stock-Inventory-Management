@@ -65,6 +65,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 /*# sourceMappingURL=maps/backend.css.map */
 
+.vs__dropdown-toggle{
+    height: 45px;
+    line-height: 45px;
+    background: #fff;
+    border: 1px solid #DCDFE8;
+    font-size: 14px;
+    color: #676E8A;
+    border-radius: 10px;
+}
+
 /*!
  * Font Awesome Free 5.14.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)

@@ -6237,6 +6237,7 @@ __webpack_require__.r(__webpack_exports__);
       });
 
       if (item.subcategories.length > 0) {
+        this.product.subcategory = '';
         this.subcategories = item.subcategories;
       } else {
         this.subcategories = [];
