@@ -45,11 +45,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-sm-3 align-self-center" for="title">Status:</label>
                                     <div class="col-sm-9">
-                                        <select type="text" v-model="category.status" class="form-control" id="status">
-                                            <option value="" disabled hidden selected>Select Status</option>
-                                            <option value="Active">Active</option>
-                                            <option value="Inactive">Inactive</option>
-                                        </select>
+                                        <v-select v-model="category.status" style="width: 100%" placeholder="Select Status" :options="['Active','Inactive']"/>
                                         <span v-if="errors.status" class="error text-danger">{{ errors.status[0] }}</span>
                                     </div>
                                 </div>
@@ -71,7 +67,13 @@
 </template>
 
 <script>
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+
 export default {
+    components: {
+        vSelect
+    },
 
     data() {
         return {

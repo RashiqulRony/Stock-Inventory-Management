@@ -22,16 +22,22 @@ Route::post('login', 'AuthController@login');
 Route::post('register', 'AuthController@register');
 Route::post('refresh-token', 'AuthController@refreshToken');
 
+# Authentication routes...
 Route::group(['middleware' => ['jwt.auth']], function () {
     Route::post('me', 'AuthController@me');
     Route::post('logout', 'AuthController@logout');
 
+    # Common routes...
     Route::post('profile-update', 'CommonController@profileUpdate');
     Route::post('change-password', 'CommonController@changePassword');
     Route::get('get-categories', 'CommonController@getCategories');
+    Route::get('get-subcategories', 'CommonController@getSubcategories');
+    Route::get('get-brands', 'CommonController@getBrands');
 
+    # Resources routes...
     Route::apiResource('category', 'CategoryController');
     Route::apiResource('subcategory', 'SubcategoryController');
     Route::apiResource('brand', 'BrandController');
+    Route::apiResource('product', 'ProductController');
 
 });

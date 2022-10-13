@@ -23,6 +23,10 @@ import Brand                from '../components/brand/Index'
 import BrandCreate          from '../components/brand/Create'
 import BrandEdit            from '../components/brand/Edit'
 
+import Product              from '../components/product/Index'
+import ProductCreate        from '../components/product/Create'
+import ProductEdit          from '../components/product/Edit'
+
 
 const router =  new Router({
     mode: 'history',
@@ -104,7 +108,25 @@ const router =  new Router({
             path: "/brand/edit/:id",
             name: "BrandEdit",
             components: {'default': BrandEdit, 'header': Header, 'footer': Footer},
-            meta: {requiresAuth: true, title: 'BrandEdit Edit'}
+            meta: {requiresAuth: true, title: 'Brand Edit'}
+        },
+        {
+            path: "/product",
+            name: "Product",
+            components: {'default': Product, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Product'}
+        },
+        {
+            path: "/product/create",
+            name: "ProductCreate",
+            components: {'default': ProductCreate, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Product Create'}
+        },
+        {
+            path: "/product/edit/:id",
+            name: "ProductEdit",
+            components: {'default': ProductEdit, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Product Edit'}
         },
         {
             path: "/:catchAll(.*)",

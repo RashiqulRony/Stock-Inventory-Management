@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\User;
 use App\Traits\ImageUpload;
 use Illuminate\Http\Request;
@@ -109,7 +111,48 @@ class CommonController extends Controller
 
     public function getCategories() {
         try {
-            $data = Category::where('user_id', $this->_authUser->id)->orderBy('id', 'desc')->get();
+            $data = Category::with('subcategories')->where('user_id', $this->_authUser->id)->orderBy('id', 'desc')->get();
+
+            return response()->json([
+                'status'  => true,
+                'message' => "Data get successfully.",
+                'data'    => $data,
+            ]);
+
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function getSubcategories() {
+        try {
+            $data = Subcategory::where('subcategories.user_id', $this->_authUser->id)
+                ->where('subcategories.status', 'Active')
+                ->join('categories', 'subcategories.category_id', '=', 'categories.id')
+                ->select('subcategories.*', 'categories.title as category_title')
+                ->orderBy('subcategories.id', 'desc')
+                ->get();
+
+            return response()->json([
+                'status'  => true,
+                'message' => "Data get successfully.",
+                'data'    => $data,
+            ]);
+
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function getBrands() {
+        try {
+            $data = Brand::where('user_id', $this->_authUser->id)->orderBy('id', 'desc')->get();
 
             return response()->json([
                 'status'  => true,
