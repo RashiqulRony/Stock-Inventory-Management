@@ -8,10 +8,10 @@
                             <div class="header-title">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 class="card-title">Categories</h4>
+                                        <h4 class="card-title">Brands</h4>
                                     </div>
                                     <div class="col-6">
-                                        <router-link class="btn btn-sm btn-primary rounded-pill" style="float: right" :to="'/category/create'">
+                                        <router-link class="btn btn-sm btn-primary rounded-pill" style="float: right" :to="'/brand/create'">
                                             <i class="ri-add-line"></i>
                                             Create
                                         </router-link>
@@ -36,7 +36,7 @@
                                     <tr v-for="(row, index) in allData" :key="index">
                                         <th scope="row">{{ index + 1 }}</th>
                                         <td>
-                                            <img v-if="row.image" width="80" :src="assetPath + '/category/' +row.image">
+                                            <img v-if="row.image" width="80" :src="assetPath + '/brand/' +row.image">
                                         </td>
                                         <td>{{ row.title }}</td>
                                         <td>{{ row.description }}</td>
@@ -48,7 +48,7 @@
                                                         Action
                                                     </button>
                                                     <div class="dropdown-menu" :aria-labelledby="'btnGroupDrop'+index" style="">
-                                                        <router-link class="dropdown-item" :to="{name: 'CategoryEdit', params: {id: row.id}}">Edit</router-link>
+                                                        <router-link class="dropdown-item" :to="{name: 'BrandEdit', params: {id: row.id}}">Edit</router-link>
                                                         <a @click="deleteRow(row.id)" class="dropdown-item" href="#">Delete</a>
                                                     </div>
                                                 </div>
@@ -82,7 +82,7 @@ export default {
     methods:{
 
         getData() {
-            axios.get(Api.category, { headers: store.getters.headers })
+            axios.get(Api.brand, { headers: store.getters.headers })
                 .then((response) => response.data)
                 .then((response) => {
                     if (response.status === true) {
@@ -108,7 +108,7 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete(Api.category+"/"+id, { headers: store.getters.headers })
+                    axios.delete(Api.brand+"/"+id, { headers: store.getters.headers })
                         .then((response) => response.data)
                         .then((response) => {
                             if (response.status === true) {

@@ -11,7 +11,8 @@ export default {
 
     common: {
         profile        : `${apiUrl}/profile-update`,
-        changePassword : `${apiUrl}/change-password`
+        changePassword : `${apiUrl}/change-password`,
+        getCategories  : `${apiUrl}/get-categories`,
     },
 
     category    : `${apiUrl}/category`,

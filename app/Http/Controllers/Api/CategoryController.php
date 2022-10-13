@@ -11,28 +11,30 @@ use Illuminate\Support\Facades\Validator;
 class CategoryController extends Controller
 {
     use ImageUpload;
+
     public $_filePath = '';
+    public $_authUser = null;
 
     public function __construct()
     {
         $this->_filePath = auth('api')->user()->domain.'/category';
+        $this->_authUser = auth('api')->user();
     }
 
     public function index()
     {
         try {
-            $user = auth('api')->user();
-            $data = Category::where('user_id', $user->id)->orderBy('id', 'desc')->get();
+            $data = Category::where('user_id', $this->_authUser->id)->orderBy('id', 'desc')->get();
 
             return response()->json([
-                'status' => true,
+                'status'  => true,
                 'message' => 'Data get successfully',
-                'data' => $data
+                'data'    => $data
             ]);
 
         } catch (\Exception $exception) {
             return response()->json([
-                'status' => false,
+                'status'  => false,
                 'message' => $exception->getMessage()
             ]);
         }
@@ -42,7 +44,7 @@ class CategoryController extends Controller
     {
         $rules = [
             'title'      => 'required|max:255',
-            'status'   => 'required|in:Active,Inactive',
+            'status'     => 'required|in:Active,Inactive',
             'image'      => 'nullable|image',
         ];
 
@@ -53,12 +55,12 @@ class CategoryController extends Controller
 
         try {
             if ($request->hasFile('image')) {
-                $file = $this->imageUpload($request->file('image'), $this->_filePath, '');
+                $file  = $this->imageUpload($request->file('image'), $this->_filePath, '');
                 $image = $file['name'];
             }
 
             Category::create([
-                 'user_id'      => auth('api')->id(),
+                 'user_id'      => $this->_authUser->id,
                  'title'        => $request->title,
                  'description'  => $request->description,
                  'image'        => $image ?? null,
@@ -80,11 +82,11 @@ class CategoryController extends Controller
     public function show($id)
     {
         try {
-            $data = Category::find($id);
+            $data = Category::where('user_id', $this->_authUser->id)->find($id);
             return response()->json([
                 'status'  => true,
                 'message' => "Data get successfully",
-                'data' => $data
+                'data'    => $data
             ]);
         } catch (\Exception $exception) {
             return response()->json([
@@ -98,7 +100,7 @@ class CategoryController extends Controller
     {
         $rules = [
             'title'      => 'required|max:255',
-            'status'   => 'required|in:Active,Inactive',
+            'status'     => 'required|in:Active,Inactive',
             'image'      => 'nullable|image',
         ];
 
@@ -108,18 +110,20 @@ class CategoryController extends Controller
         }
 
         try {
-            $category = Category::find($id);
+            $data = Category::where('user_id', $this->_authUser->id)->find($id);
 
             if ($request->hasFile('image')) {
-                $this->imageAndFileDelete($this->_filePath, $category->image, '');
+                if ($data->image) {
+                    $this->imageAndFileDelete($this->_filePath, $data->image, '');
+                }
                 $file = $this->imageUpload($request->file('image'), $this->_filePath, '');
                 $image = $file['name'];
             }
 
-            $category->update([
+            $data->update([
                 'title'        => $request->title,
                 'description'  => $request->description,
-                'image'        => $image ?? $category->image,
+                'image'        => $image ?? $data->image,
                 'status'       => $request->status,
             ]);
 
@@ -137,6 +141,22 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        //
+        try {
+            $data = Category::where('user_id', $this->_authUser->id)->find($id);
+            if ($data->image) {
+                $this->imageAndFileDelete($this->_filePath, $data->image, '');
+            }
+            $data->delete();
+
+            return response()->json([
+                'status'  => true,
+                'message' => "Category delete successfully !!"
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status'  => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
     }
 }

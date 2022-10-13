@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use App\Traits\ImageUpload;
 use Illuminate\Http\Request;
@@ -14,10 +15,16 @@ class CommonController extends Controller
 {
     use ImageUpload;
 
+    public $_authUser = null;
+
+    public function __construct()
+    {
+        $this->_authUser = auth('api')->user();
+    }
+
     public function profileUpdate(Request $request) {
         try {
-            $auth = auth('api')->user();
-            $user = User::find($auth->id);
+            $user = User::find($this->_authUser->id);
             $rules = [
                 'name'      => 'required|max:191',
                 'email'     => 'required|email|max:191|unique:users,email,'.$user->id,
@@ -31,12 +38,12 @@ class CommonController extends Controller
             }
 
             if ($request->hasFile('avatar')) {
-                $this->imageAndFileDelete($user->domain, $auth->avatar, '');
+                $this->imageAndFileDelete($user->domain, $this->_authUser->avatar, '');
                 $file = $this->imageUpload($request->file('avatar'), $user->domain, '');
                 $avatar = $file['name'];
             }
             if ($request->hasFile('logo')) {
-                $this->imageAndFileDelete($user->domain, $auth->logo, '');
+                $this->imageAndFileDelete($user->domain, $this->_authUser->logo, '');
                 $file = $this->imageUpload($request->file('logo'), $user->domain, '');
                 $logo = $file['name'];
             }
@@ -45,8 +52,8 @@ class CommonController extends Controller
                 'name'    => $request->name,
                 'email'   => $request->email,
                 'phone'   => $request->phone,
-                'avatar'  => isset($avatar) ? $avatar : $user->avatar,
-                'logo'    => isset($logo) ? $logo : $user->logo,
+                'avatar'  => $avatar ?? $user->avatar,
+                'logo'    => $logo ?? $user->logo,
                 'address' => $request->address,
             ]);
 
@@ -76,10 +83,9 @@ class CommonController extends Controller
         }
 
         try {
-            $user = auth('api')->user();
 
-            if (Hash::check($request->old_password, $user->password)) {
-                User::find($user->id)->update([
+            if (Hash::check($request->old_password, $this->_authUser->password)) {
+                User::find($this->_authUser->id)->update([
                     'password' => bcrypt($request->password)
                 ]);
 
@@ -93,6 +99,24 @@ class CommonController extends Controller
                     'message' => "Your old password word did not match"
                 ]);
             }
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function getCategories() {
+        try {
+            $data = Category::where('user_id', $this->_authUser->id)->orderBy('id', 'desc')->get();
+
+            return response()->json([
+                'status'  => true,
+                'message' => "Data get successfully.",
+                'data'    => $data,
+            ]);
+
         } catch (\Exception $exception) {
             return response()->json([
                 'status' => false,

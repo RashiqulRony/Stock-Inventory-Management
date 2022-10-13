@@ -6,37 +6,37 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
-                                <h4 class="card-title">Category Create</h4>
+                                <h4 class="card-title">Brand Edit</h4>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form class="form-horizontal" @submit.prevent="create()">
+                            <form class="form-horizontal" @submit.prevent="update()">
 
                                 <div class="form-group row">
                                     <label class="control-label col-sm-3 align-self-center" for="title">Title:</label>
                                     <div class="col-sm-9">
-                                        <input type="text" v-model="category.title" class="form-control" id="title" placeholder="Enter category title">
+                                        <input type="text" v-model="brand.title" class="form-control" id="title" placeholder="Enter brand title">
                                         <span v-if="errors.title" class="error text-danger">{{ errors.title[0] }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label col-sm-3 align-self-center" for="description">Description:</label>
                                     <div class="col-sm-9">
-                                        <textarea v-model="category.description" class="form-control" rows="3" id="description" placeholder="Enter description"></textarea>
+                                        <textarea v-model="brand.description" class="form-control" rows="3" id="description" placeholder="Enter description"></textarea>
                                         <span v-if="errors.description" class="error text-danger">{{ errors.description[0] }}</span>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-3 align-self-center" for="categoryImage">Category Image:</label>
+                                    <label class="control-label col-sm-3 align-self-center" for="image">Brand Image:</label>
                                     <div class="col-sm-9">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Upload</span>
                                             </div>
                                             <div class="custom-file">
-                                                <input type="file" accept="image/*" class="custom-file-input" id="categoryImage">
-                                                <label class="custom-file-label selected" for="categoryImage"></label>
+                                                <input type="file" accept="image/*" class="custom-file-input" id="image">
+                                                <label class="custom-file-label selected" for="image"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -45,7 +45,7 @@
                                 <div class="form-group row">
                                     <label class="control-label col-sm-3 align-self-center" for="title">Status:</label>
                                     <div class="col-sm-9">
-                                        <select type="text" v-model="category.status" class="form-control" id="status">
+                                        <select type="text" v-model="brand.status" class="form-control" id="status">
                                             <option value="" disabled hidden selected>Select Status</option>
                                             <option value="Active">Active</option>
                                             <option value="Inactive">Inactive</option>
@@ -55,11 +55,14 @@
                                 </div>
 
                                 <div class="form-group text-right">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </form>
                         </div>
                     </div>
+                </div>
+                <div v-if="data.image" class="col-md-4 col-sm-12 col-lg-4">
+                    <img class="img-fluid" :src="assetPath+'brand/'+ data.image">
                 </div>
 
             </div>
@@ -72,7 +75,8 @@ export default {
 
     data() {
         return {
-            category: {
+            data: '',
+            brand: {
                 title: '',
                 description: '',
                 status: '',
@@ -82,14 +86,18 @@ export default {
         };
     },
 
+    mounted() {
+        this.getData()
+    },
+
     methods:{
-        create() {
+        update() {
             const config = {
                 headers: { 'content-type': 'multipart/form-data' }
             };
 
             let postData = new FormData();
-            let image = document.getElementById("categoryImage").files[0];
+            let image = document.getElementById("image").files[0];
             if (image !== undefined){
                 if(image.type === 'image/jpeg' || image.type === 'image/png' || image.type === 'image/webp' || image.type === 'image/gif'){
                     postData.append('image', image);
@@ -97,22 +105,42 @@ export default {
                     alert('This file is not an image')
                 }
             }
-            postData.append('title', this.category.title);
-            postData.append('description', this.category.description);
-            postData.append('status', this.category.status);
+            postData.append('title', this.brand.title);
+            postData.append('description', this.brand.description);
+            postData.append('status', this.brand.status);
+            postData.append('_method', "PUT");
 
-            axios.post(Api.category, postData, { headers: store.getters.headers, config })
+            axios.post(Api.brand+"/"+this.$route.params.id, postData, { headers: store.getters.headers, config })
                 .then((response) => response.data)
                 .then((response) => {
                     if (response.status === true) {
                         this.alertMessage('success', response.message)
-                        this.$router.push({ path: `/category` });
+                        this.$router.push({ path: `/brand` });
                     } else {
                         this.errors = response.errors
                     }
                 })
                 .catch((error) => {
                     this.alertMessage('error', 'Something went wrong. Please try again')
+                    console.log(error);
+                });
+        },
+
+        getData() {
+            axios.get(Api.brand+"/"+this.$route.params.id, { headers: store.getters.headers })
+                .then((response) => response.data)
+                .then((response) => {
+                    if (response.status === true) {
+                        this.data = response.data
+                        this.brand = {
+                            title: response.data.title,
+                            description: response.data.description,
+                            status: response.data.status,
+                        }
+
+                    }
+                })
+                .catch((error) => {
                     console.log(error);
                 });
         },

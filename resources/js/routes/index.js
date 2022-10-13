@@ -3,21 +3,30 @@ import Router from 'vue-router'
 
 Vue.use(Router);
 
-import Login            from '../components/auth/Login'
-import Header           from '../components/share/Header';
-import Footer           from '../components/share/Footer';
-import NotFound         from '../components/NotFound'
+import Login                from '../components/auth/Login'
+import Header               from '../components/share/Header';
+import Footer               from '../components/share/Footer';
+import NotFound             from '../components/NotFound'
 
-import Dashboard        from '../components/Dashboard'
-import Profile          from '../components/Profile'
+import Dashboard            from '../components/Dashboard'
+import Profile              from '../components/Profile'
 
-import Category         from '../components/category/Index'
-import CategoryCreate   from '../components/category/Create'
-import CategoryEdit     from '../components/category/Edit'
+import Category             from '../components/category/Index'
+import CategoryCreate       from '../components/category/Create'
+import CategoryEdit         from '../components/category/Edit'
+
+import Subcategory          from '../components/subcategory/Index'
+import SubcategoryCreate    from '../components/subcategory/Create'
+import SubcategoryEdit      from '../components/subcategory/Edit'
+
+import Brand                from '../components/brand/Index'
+import BrandCreate          from '../components/brand/Create'
+import BrandEdit            from '../components/brand/Edit'
 
 
 const router =  new Router({
     mode: 'history',
+    linkExactActiveClass: "active",
     routes: [
         {
             path: "/",
@@ -60,6 +69,42 @@ const router =  new Router({
             name: "CategoryEdit",
             components: {'default': CategoryEdit, 'header': Header, 'footer': Footer},
             meta: {requiresAuth: true, title: 'Category Edit'}
+        },
+        {
+            path: "/subcategory",
+            name: "Subcategory",
+            components: {'default': Subcategory, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Subcategory'}
+        },
+        {
+            path: "/subcategory/create",
+            name: "SubcategoryCreate",
+            components: {'default': SubcategoryCreate, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Subcategory Create'}
+        },
+        {
+            path: "/subcategory/edit/:id",
+            name: "SubcategoryEdit",
+            components: {'default': SubcategoryEdit, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Subcategory Edit'}
+        },
+        {
+            path: "/brand",
+            name: "Brand",
+            components: {'default': Brand, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Brand'}
+        },
+        {
+            path: "/brand/create",
+            name: "BrandCreate",
+            components: {'default': BrandCreate, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Brand Create'}
+        },
+        {
+            path: "/brand/edit/:id",
+            name: "BrandEdit",
+            components: {'default': BrandEdit, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'BrandEdit Edit'}
         },
         {
             path: "/:catchAll(.*)",

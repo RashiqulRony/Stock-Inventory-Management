@@ -10,7 +10,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form class="form-horizontal" @submit.prevent="createCategory()">
+                            <form class="form-horizontal" @submit.prevent="update()">
 
                                 <div class="form-group row">
                                     <label class="control-label col-sm-3 align-self-center" for="title">Title:</label>
@@ -91,7 +91,7 @@ export default {
     },
 
     methods:{
-        createCategory() {
+        update() {
             const config = {
                 headers: { 'content-type': 'multipart/form-data' }
             };

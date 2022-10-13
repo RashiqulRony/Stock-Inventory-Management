@@ -28,6 +28,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
     Route::post('profile-update', 'CommonController@profileUpdate');
     Route::post('change-password', 'CommonController@changePassword');
+    Route::get('get-categories', 'CommonController@getCategories');
 
     Route::apiResource('category', 'CategoryController');
     Route::apiResource('subcategory', 'SubcategoryController');
