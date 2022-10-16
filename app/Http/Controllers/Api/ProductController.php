@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use App\Traits\ImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -48,9 +49,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'title'      => 'required|max:255',
-            'status'     => 'required|in:Active,Inactive',
-            'image'      => 'nullable|image',
+            'category'      => 'required|exists:categories,id',
+            'subcategory'   => 'required|exists:subcategories,id',
+            'brand'         => 'required|exists:brands,id',
+            'name'          => 'required|max:255',
+            'status'        => 'required|in:Active,Inactive',
+            'image'         => 'nullable|image',
+            'variants'      => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -64,13 +69,36 @@ class ProductController extends Controller
                 $image = $file['name'];
             }
 
-            Product::create([
-                'user_id'      => $this->_authUser->id,
-                'title'        => $request->title,
-                'description'  => $request->description,
-                'image'        => $image ?? null,
-                'status'       => $request->status,
+            $product = Product::create([
+                'user_id'        => $this->_authUser->id,
+                'category_id'    => $request->category,
+                'subcategory_id' => $request->subcategory,
+                'brand_id'       => $request->brand,
+                'name'           => $request->name,
+                'descriptions'   => $request->description,
+                'notes'          => $request->notes,
+                'image'          => $image ?? null,
+                'status'         => $request->status,
             ]);
+
+            if ($product) {
+                $variants = json_decode($request->variants, true);
+                $productV = [];
+                foreach ($variants as $variant) {
+                    $productV[] = [
+                        'product_id' => $product->id,
+                        'code'       => $variant['code'],
+                        'color'      => $variant['color'],
+                        'size'       => $variant['size'],
+                        'pieces'     => $variant['pieces'],
+                        'weight'     => $variant['weight'],
+                        'cost'       => $variant['cost'],
+                        'price'      => $variant['price'],
+                        'stock'      => $variant['stock'],
+                    ];
+                }
+                ProductVariant::insert($productV);
+            }
 
             return response()->json([
                 'status'  => true,
@@ -87,7 +115,7 @@ class ProductController extends Controller
     public function show($id)
     {
         try {
-            $data = Product::where('user_id', $this->_authUser->id)->find($id);
+            $data = Product::with('variants')->where('user_id', $this->_authUser->id)->find($id);
             return response()->json([
                 'status'  => true,
                 'message' => "Data get successfully",
@@ -104,9 +132,13 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'title'      => 'required|max:255',
-            'status'     => 'required|in:Active,Inactive',
-            'image'      => 'nullable|image',
+            'category'      => 'required|exists:categories,id',
+            'subcategory'   => 'required|exists:subcategories,id',
+            'brand'         => 'required|exists:brands,id',
+            'name'          => 'required|max:255',
+            'status'        => 'required|in:Active,Inactive',
+            'image'         => 'nullable|image',
+            'variants'      => 'required',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -126,11 +158,35 @@ class ProductController extends Controller
             }
 
             $data->update([
-                'title'        => $request->title,
-                'description'  => $request->description,
-                'image'        => $image ?? $data->image,
-                'status'       => $request->status,
+                'category_id'    => $request->category,
+                'subcategory_id' => $request->subcategory,
+                'brand_id'       => $request->brand,
+                'name'           => $request->name,
+                'descriptions'   => $request->description,
+                'notes'          => $request->notes,
+                'image'          => $image ?? $data->image,
+                'status'         => $request->status,
             ]);
+
+            if ($data) {
+                ProductVariant::where('product_id', $data->id)->delete();
+                $variants = json_decode($request->variants, true);
+                $productV = [];
+                foreach ($variants as $variant) {
+                    $productV[] = [
+                        'product_id' => $data->id,
+                        'code'       => $variant['code'],
+                        'color'      => $variant['color'],
+                        'size'       => $variant['size'],
+                        'pieces'     => $variant['pieces'],
+                        'weight'     => $variant['weight'],
+                        'cost'       => $variant['cost'],
+                        'price'      => $variant['price'],
+                        'stock'      => $variant['stock'],
+                    ];
+                }
+                ProductVariant::insert($productV);
+            }
 
             return response()->json([
                 'status'  => true,

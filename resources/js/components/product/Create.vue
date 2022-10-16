@@ -1,21 +1,21 @@
 <template>
     <div class="content-page">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 col-sm-12 col-lg-6">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <div class="header-title">
-                                <h4 class="card-title">Product Create</h4>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <form class="form-horizontal" @submit.prevent="create()">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Product Create</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <form class="form-horizontal" @submit.prevent="create()">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-lg-6">
                                 <div class="form-group row">
                                     <label class="control-label col-sm-3 align-self-center" for="category">Category:</label>
                                     <div class="col-sm-9">
-                                        <v-select v-model="product.category"
-                                                  :reduce="(option) => option.id"
+                                        <v-select :reduce="(option) => option.id"
                                                   :options="categories"
                                                   label="title" id="category"
                                                   style="width: 100%"
@@ -52,23 +52,15 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-3 align-self-center" for="title">Title:</label>
+                                    <label class="control-label col-sm-3 align-self-center" for="name">Name:</label>
                                     <div class="col-sm-9">
-                                        <input type="text" v-model="product.title" class="form-control" id="title" placeholder="Enter product title">
-                                        <span v-if="errors.title" class="error text-danger">{{ errors.title[0] }}</span>
+                                        <input type="text" v-model="product.name" class="form-control" id="name" placeholder="Enter product name">
+                                        <span v-if="errors.name" class="error text-danger">{{ errors.name[0] }}</span>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-3 align-self-center" for="description">Description:</label>
-                                    <div class="col-sm-9">
-                                        <textarea v-model="product.description" class="form-control" rows="3" id="description" placeholder="Enter description"></textarea>
-                                        <span v-if="errors.description" class="error text-danger">{{ errors.description[0] }}</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="control-label col-sm-3 align-self-center" for="image">product Image:</label>
+                                    <label class="control-label col-sm-3 align-self-center" for="image">Product Image:</label>
                                     <div class="col-sm-9">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -83,21 +75,71 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-3 align-self-center" for="title">Status:</label>
+                                    <label class="control-label col-sm-3 align-self-center" for="description">Description:</label>
                                     <div class="col-sm-9">
-                                        <v-select v-model="product.status" style="width: 100%" placeholder="Select Status" :options="['Active','Inactive']"/>
-                                        <span v-if="errors.status" class="error text-danger">{{ errors.status[0] }}</span>
+                                        <textarea v-model="product.description" class="form-control" rows="3" id="description" placeholder="Enter description"></textarea>
+                                        <span v-if="errors.description" class="error text-danger">{{ errors.description[0] }}</span>
                                     </div>
                                 </div>
 
-                                <div class="form-group text-right">
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3 align-self-center" for="notes">Notes:</label>
+                                    <div class="col-sm-9">
+                                        <textarea v-model="product.notes" class="form-control" rows="3" id="notes" placeholder="Enter notes"></textarea>
+                                        <span v-if="errors.notes" class="error text-danger">{{ errors.notes[0] }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3 align-self-center" for="status">Status:</label>
+                                    <div class="col-sm-9">
+                                        <v-select v-model="product.status" id="status" style="width: 100%" placeholder="Select Status" :options="['Active','Inactive']"/>
+                                        <span v-if="errors.status" class="error text-danger">{{ errors.status[0] }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <h5 class="mt-3">Product Variants</h5>
+                                <div v-for="(variant, index) in variants" :key="'var_'+index"  class="form-row mt-2">
+                                    <div class="col">
+                                        <input type="text" v-model="variant.code" class="form-control" placeholder="code">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" v-model="variant.color" class="form-control" placeholder="color">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" v-model="variant.size" class="form-control" placeholder="size">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" min="1" v-model="variant.pieces" class="form-control" placeholder="pieces">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" v-model="variant.weight" class="form-control" placeholder="weight">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" required step="0.01" min="1" max="99999999" v-model="variant.cost" class="form-control" placeholder="cost">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" required step="0.01" min="1" max="99999999" v-model="variant.price" class="form-control" placeholder="price">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" required min="1" max="99999999" v-model="variant.stock" class="form-control" placeholder="stock">
+                                    </div>
+                                    <div class="col">
+                                        <button style="float: right; height: 45px;" v-if="index !== 0" @click="remove(index)" type="button" class="btn btn-outline-danger">Remove</button>
+                                        <button style="float: right; height: 45px;" v-else @click="addMore()" type="button" class="btn btn-outline-success">Add More</button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group text-right mt-5">
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
+                    </form>
+
+                </div>
             </div>
         </div>
     </div>
@@ -123,10 +165,21 @@ export default {
                 notes: '',
                 status: '',
             },
+            variants: [{
+                code: "",
+                color: "",
+                size: "",
+                weight: "",
+                cost: "",
+                price: "",
+                stock: "",
+                pieces: "",
+            }],
             categories: [],
             subcategories: [],
             brands: [],
             errors: [],
+
         };
     },
 
@@ -151,9 +204,14 @@ export default {
                 }
             }
             postData.append('category', this.product.category);
-            postData.append('title', this.product.title);
+            postData.append('subcategory', this.product.subcategory);
+            postData.append('brand', this.product.brand);
+            postData.append('name', this.product.name);
             postData.append('description', this.product.description);
+            postData.append('notes', this.product.notes);
             postData.append('status', this.product.status);
+            postData.append('variants', JSON.stringify(this.variants));
+
 
             axios.post(Api.product, postData, { headers: store.getters.headers, config })
                 .then((response) => response.data)
@@ -184,8 +242,9 @@ export default {
                 });
         },
 
-        getSubcategory() {
-            let item = this.categories.find(item => item.id === this.product.category);
+        getSubcategory(e) {
+            let item = this.categories.find(item => item.id === e);
+            this.product.category = e;
             if (item.subcategories.length > 0) {
                 this.product.subcategory = '';
                 this.subcategories = item.subcategories;
@@ -193,6 +252,7 @@ export default {
                 this.subcategories = [];
                 this.product.subcategory = '';
             }
+
         },
 
         getBrands() {
@@ -206,6 +266,22 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+
+        addMore() {
+            this.variants.push({
+                code: "",
+                color: "",
+                size: "",
+                weight: "",
+                cost: "",
+                price: "",
+                stock: "",
+                pieces: "",
+            });
+        },
+        remove(index) {
+            this.variants.splice(index, 1);
         },
 
         alertMessage(type, message) {

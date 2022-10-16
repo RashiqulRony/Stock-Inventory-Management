@@ -6159,6 +6159,16 @@ __webpack_require__.r(__webpack_exports__);
         notes: '',
         status: ''
       },
+      variants: [{
+        code: "",
+        color: "",
+        size: "",
+        weight: "",
+        cost: "",
+        price: "",
+        stock: "",
+        pieces: ""
+      }],
       categories: [],
       subcategories: [],
       brands: [],
@@ -6190,9 +6200,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       postData.append('category', this.product.category);
-      postData.append('title', this.product.title);
+      postData.append('subcategory', this.product.subcategory);
+      postData.append('brand', this.product.brand);
+      postData.append('name', this.product.name);
       postData.append('description', this.product.description);
+      postData.append('notes', this.product.notes);
       postData.append('status', this.product.status);
+      postData.append('variants', JSON.stringify(this.variants));
       axios.post(Api.product, postData, {
         headers: store.getters.headers,
         config: config
@@ -6229,12 +6243,11 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    getSubcategory: function getSubcategory() {
-      var _this3 = this;
-
+    getSubcategory: function getSubcategory(e) {
       var item = this.categories.find(function (item) {
-        return item.id === _this3.product.category;
+        return item.id === e;
       });
+      this.product.category = e;
 
       if (item.subcategories.length > 0) {
         this.product.subcategory = '';
@@ -6245,7 +6258,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getBrands: function getBrands() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios.get(Api.common.getBrands, {
         headers: store.getters.headers
@@ -6253,11 +6266,26 @@ __webpack_require__.r(__webpack_exports__);
         return response.data;
       }).then(function (response) {
         if (response.status === true) {
-          _this4.brands = response.data;
+          _this3.brands = response.data;
         }
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    addMore: function addMore() {
+      this.variants.push({
+        code: "",
+        color: "",
+        size: "",
+        weight: "",
+        cost: "",
+        price: "",
+        stock: "",
+        pieces: ""
+      });
+    },
+    remove: function remove(index) {
+      this.variants.splice(index, 1);
     },
     alertMessage: function alertMessage(type, message) {
       this.$swal.fire({
@@ -9268,10 +9296,6 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "container-fluid"
   }, [_c("div", {
-    staticClass: "row"
-  }, [_c("div", {
-    staticClass: "col-md-6 col-sm-12 col-lg-6"
-  }, [_c("div", {
     staticClass: "card"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "card-body"
@@ -9283,6 +9307,10 @@ var render = function render() {
         return _vm.create();
       }
     }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6 col-sm-12 col-lg-6"
   }, [_c("div", {
     staticClass: "form-group row"
   }, [_c("label", {
@@ -9307,13 +9335,6 @@ var render = function render() {
     },
     on: {
       input: _vm.getSubcategory
-    },
-    model: {
-      value: _vm.product.category,
-      callback: function callback($$v) {
-        _vm.$set(_vm.product, "category", $$v);
-      },
-      expression: "product.category"
     }
   }), _vm._v(" "), _vm.errors.category ? _c("span", {
     staticClass: "error text-danger"
@@ -9384,36 +9405,36 @@ var render = function render() {
   }, [_c("label", {
     staticClass: "control-label col-sm-3 align-self-center",
     attrs: {
-      "for": "title"
+      "for": "name"
     }
-  }, [_vm._v("Title:")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Name:")]), _vm._v(" "), _c("div", {
     staticClass: "col-sm-9"
   }, [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.product.title,
-      expression: "product.title"
+      value: _vm.product.name,
+      expression: "product.name"
     }],
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "title",
-      placeholder: "Enter product title"
+      id: "name",
+      placeholder: "Enter product name"
     },
     domProps: {
-      value: _vm.product.title
+      value: _vm.product.name
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
 
-        _vm.$set(_vm.product, "title", $event.target.value);
+        _vm.$set(_vm.product, "name", $event.target.value);
       }
     }
-  }), _vm._v(" "), _vm.errors.title ? _c("span", {
+  }), _vm._v(" "), _vm.errors.name ? _c("span", {
     staticClass: "error text-danger"
-  }, [_vm._v(_vm._s(_vm.errors.title[0]))]) : _vm._e()])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.errors.name[0]))]) : _vm._e()])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
     staticClass: "form-group row"
   }, [_c("label", {
     staticClass: "control-label col-sm-3 align-self-center",
@@ -9447,12 +9468,46 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.errors.description ? _c("span", {
     staticClass: "error text-danger"
-  }, [_vm._v(_vm._s(_vm.errors.description[0]))]) : _vm._e()])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.errors.description[0]))]) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "form-group row"
   }, [_c("label", {
     staticClass: "control-label col-sm-3 align-self-center",
     attrs: {
-      "for": "title"
+      "for": "notes"
+    }
+  }, [_vm._v("Notes:")]), _vm._v(" "), _c("div", {
+    staticClass: "col-sm-9"
+  }, [_c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.product.notes,
+      expression: "product.notes"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      rows: "3",
+      id: "notes",
+      placeholder: "Enter notes"
+    },
+    domProps: {
+      value: _vm.product.notes
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+
+        _vm.$set(_vm.product, "notes", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _vm.errors.notes ? _c("span", {
+    staticClass: "error text-danger"
+  }, [_vm._v(_vm._s(_vm.errors.notes[0]))]) : _vm._e()])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group row"
+  }, [_c("label", {
+    staticClass: "control-label col-sm-3 align-self-center",
+    attrs: {
+      "for": "status"
     }
   }, [_vm._v("Status:")]), _vm._v(" "), _c("div", {
     staticClass: "col-sm-9"
@@ -9461,6 +9516,7 @@ var render = function render() {
       width: "100%"
     },
     attrs: {
+      id: "status",
       placeholder: "Select Status",
       options: ["Active", "Inactive"]
     },
@@ -9473,7 +9529,250 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.errors.status ? _c("span", {
     staticClass: "error text-danger"
-  }, [_vm._v(_vm._s(_vm.errors.status[0]))]) : _vm._e()], 1)]), _vm._v(" "), _vm._m(2)])])])])])])]);
+  }, [_vm._v(_vm._s(_vm.errors.status[0]))]) : _vm._e()], 1)])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-12 col-sm-12 col-lg-12"
+  }, [_c("h5", {
+    staticClass: "mt-3"
+  }, [_vm._v("Product Variants")]), _vm._v(" "), _vm._l(_vm.variants, function (variant, index) {
+    return _c("div", {
+      key: "var_" + index,
+      staticClass: "form-row mt-2"
+    }, [_c("div", {
+      staticClass: "col"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: variant.code,
+        expression: "variant.code"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "text",
+        placeholder: "code"
+      },
+      domProps: {
+        value: variant.code
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+
+          _vm.$set(variant, "code", $event.target.value);
+        }
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "col"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: variant.color,
+        expression: "variant.color"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "text",
+        placeholder: "color"
+      },
+      domProps: {
+        value: variant.color
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+
+          _vm.$set(variant, "color", $event.target.value);
+        }
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "col"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: variant.size,
+        expression: "variant.size"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "text",
+        placeholder: "size"
+      },
+      domProps: {
+        value: variant.size
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+
+          _vm.$set(variant, "size", $event.target.value);
+        }
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "col"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: variant.pieces,
+        expression: "variant.pieces"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "number",
+        min: "1",
+        placeholder: "pieces"
+      },
+      domProps: {
+        value: variant.pieces
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+
+          _vm.$set(variant, "pieces", $event.target.value);
+        }
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "col"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: variant.weight,
+        expression: "variant.weight"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "text",
+        placeholder: "weight"
+      },
+      domProps: {
+        value: variant.weight
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+
+          _vm.$set(variant, "weight", $event.target.value);
+        }
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "col"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: variant.cost,
+        expression: "variant.cost"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "number",
+        required: "",
+        step: "0.01",
+        min: "1",
+        max: "99999999",
+        placeholder: "cost"
+      },
+      domProps: {
+        value: variant.cost
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+
+          _vm.$set(variant, "cost", $event.target.value);
+        }
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "col"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: variant.price,
+        expression: "variant.price"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "number",
+        required: "",
+        step: "0.01",
+        min: "1",
+        max: "99999999",
+        placeholder: "price"
+      },
+      domProps: {
+        value: variant.price
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+
+          _vm.$set(variant, "price", $event.target.value);
+        }
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "col"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: variant.stock,
+        expression: "variant.stock"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "number",
+        required: "",
+        min: "1",
+        max: "99999999",
+        placeholder: "stock"
+      },
+      domProps: {
+        value: variant.stock
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+
+          _vm.$set(variant, "stock", $event.target.value);
+        }
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "col"
+    }, [index !== 0 ? _c("button", {
+      staticClass: "btn btn-outline-danger",
+      staticStyle: {
+        "float": "right",
+        height: "45px"
+      },
+      attrs: {
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.remove(index);
+        }
+      }
+    }, [_vm._v("Remove")]) : _c("button", {
+      staticClass: "btn btn-outline-success",
+      staticStyle: {
+        "float": "right",
+        height: "45px"
+      },
+      attrs: {
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.addMore();
+        }
+      }
+    }, [_vm._v("Add More")])])]);
+  }), _vm._v(" "), _vm._m(2)], 2)])])])])])]);
 };
 
 var staticRenderFns = [function () {
@@ -9498,7 +9797,7 @@ var staticRenderFns = [function () {
     attrs: {
       "for": "image"
     }
-  }, [_vm._v("product Image:")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Product Image:")]), _vm._v(" "), _c("div", {
     staticClass: "col-sm-9"
   }, [_c("div", {
     staticClass: "input-group"
@@ -9526,7 +9825,7 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "form-group text-right"
+    staticClass: "form-group text-right mt-5"
   }, [_c("button", {
     staticClass: "btn btn-primary",
     attrs: {
@@ -9823,7 +10122,7 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.allData, function (row, index) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.allData.data, function (row, index) {
     return _c("tr", {
       key: index
     }, [_c("th", {
@@ -9840,7 +10139,7 @@ var render = function render() {
       }
     }) : _vm._e(), _vm._v(" "), _c("div", [_vm._v("\n                                                " + _vm._s(row.name) + "\n                                                "), row.notes ? _c("p", {
       staticClass: "mb-0"
-    }, [_c("small", [_vm._v(_vm._s(row.notes))])]) : _vm._e()])])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(row.category_title))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(row.subcategory_title))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(row.brand_title))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(row.description))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(row.status))]), _vm._v(" "), _c("td", [_c("div", {
+    }, [_c("small", [_vm._v(_vm._s(row.notes))])]) : _vm._e()])])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(row.category_title))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(row.subcategory_title))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(row.brand_title))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(row.descriptions))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(row.status))]), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "btn-group",
       attrs: {
         role: "group",

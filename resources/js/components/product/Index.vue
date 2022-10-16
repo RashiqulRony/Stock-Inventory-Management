@@ -35,7 +35,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr v-for="(row, index) in allData" :key="index">
+                                    <tr v-for="(row, index) in allData.data" :key="index">
                                         <th scope="row">{{ index + 1 }}</th>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -49,7 +49,7 @@
                                         <td>{{ row.category_title }}</td>
                                         <td>{{ row.subcategory_title }}</td>
                                         <td>{{ row.brand_title }}</td>
-                                        <td>{{ row.description }}</td>
+                                        <td>{{ row.descriptions }}</td>
                                         <td>{{ row.status }}</td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">

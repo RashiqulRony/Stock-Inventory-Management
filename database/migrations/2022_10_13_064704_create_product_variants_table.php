@@ -20,6 +20,7 @@ class CreateProductVariantsTable extends Migration
             $table->string('code');
             $table->string('color')->nullable();
             $table->string('size')->nullable();
+            $table->string('pieces')->nullable();
             $table->string('weight')->nullable();
             $table->decimal('cost', 10, 2)->default(0.00);
             $table->decimal('price', 10, 2)->default(0.00);
