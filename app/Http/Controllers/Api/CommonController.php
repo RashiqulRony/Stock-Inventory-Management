@@ -150,6 +150,25 @@ class CommonController extends Controller
         }
     }
 
+    public function getCategoryWiseSubcategories($categoryId) {
+        try {
+            $data = Subcategory::where('user_id', $this->_authUser->id)
+                ->where('category_id', $categoryId)
+                ->get();
+
+            return response()->json([
+                'status'  => true,
+                'message' => "Data get successfully.",
+                'data'    => $data,
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
+    }
+
     public function getBrands() {
         try {
             $data = Brand::where('user_id', $this->_authUser->id)->orderBy('id', 'desc')->get();

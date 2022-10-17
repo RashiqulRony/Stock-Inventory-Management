@@ -14,6 +14,7 @@ export default {
         changePassword      : `${apiUrl}/change-password`,
         getCategories       : `${apiUrl}/get-categories`,
         getSubcategories    : `${apiUrl}/get-subcategories`,
+        getCatWiseSubcat    : `${apiUrl}/get-category-wise-subcategories`,
         getBrands           : `${apiUrl}/get-brands`,
     },
 

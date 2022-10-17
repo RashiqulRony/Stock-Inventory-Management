@@ -58,6 +58,7 @@
                                                         Action
                                                     </button>
                                                     <div class="dropdown-menu" :aria-labelledby="'btnGroupDrop'+index" style="">
+                                                        <router-link class="dropdown-item" :to="{name: 'ProductView', params: {id: row.id}}">View</router-link>
                                                         <router-link class="dropdown-item" :to="{name: 'ProductEdit', params: {id: row.id}}">Edit</router-link>
                                                         <a @click="deleteRow(row.id)" class="dropdown-item" href="#">Delete</a>
                                                     </div>

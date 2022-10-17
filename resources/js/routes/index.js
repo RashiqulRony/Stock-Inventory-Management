@@ -26,6 +26,7 @@ import BrandEdit            from '../components/brand/Edit'
 import Product              from '../components/product/Index'
 import ProductCreate        from '../components/product/Create'
 import ProductEdit          from '../components/product/Edit'
+import ProductView          from '../components/product/View'
 
 
 const router =  new Router({
@@ -127,6 +128,12 @@ const router =  new Router({
             name: "ProductEdit",
             components: {'default': ProductEdit, 'header': Header, 'footer': Footer},
             meta: {requiresAuth: true, title: 'Product Edit'}
+        },
+        {
+            path: "/product/view/:id",
+            name: "ProductView",
+            components: {'default': ProductView, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Product View'}
         },
         {
             path: "/:catchAll(.*)",

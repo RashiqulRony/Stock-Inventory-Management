@@ -29,7 +29,7 @@ class ProductController extends Controller
                 ->leftJoin('subcategories', 'products.subcategory_id', '=', 'subcategories.id')
                 ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
                 ->select('products.*', 'categories.title as category_title', 'subcategories.title as subcategory_title', 'brands.title as brand_title')
-                ->orderBy('subcategories.id', 'desc')
+                ->orderBy('products.id', 'desc')
                 ->paginate(25);
 
             return response()->json([
@@ -115,7 +115,12 @@ class ProductController extends Controller
     public function show($id)
     {
         try {
-            $data = Product::with('variants')->where('user_id', $this->_authUser->id)->find($id);
+            $data = Product::with('variants')->where('products.user_id', $this->_authUser->id)
+                ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
+                ->leftJoin('subcategories', 'products.subcategory_id', '=', 'subcategories.id')
+                ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
+                ->select('products.*', 'categories.title as category_title', 'subcategories.title as subcategory_title', 'brands.title as brand_title')
+                ->find($id);
             return response()->json([
                 'status'  => true,
                 'message' => "Data get successfully",

@@ -32,6 +32,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
     Route::post('change-password', 'CommonController@changePassword');
     Route::get('get-categories', 'CommonController@getCategories');
     Route::get('get-subcategories', 'CommonController@getSubcategories');
+    Route::get('get-category-wise-subcategories/{category_id}', 'CommonController@getCategoryWiseSubcategories');
     Route::get('get-brands', 'CommonController@getBrands');
 
     # Resources routes...
