@@ -22,6 +22,7 @@ export default {
     subcategory : `${apiUrl}/subcategory`,
     brand       : `${apiUrl}/brand`,
     product     : `${apiUrl}/product`,
+    customer    : `${apiUrl}/customer`,
 
 
 };

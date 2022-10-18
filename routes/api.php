@@ -40,5 +40,6 @@ Route::group(['middleware' => ['jwt.auth']], function () {
     Route::apiResource('subcategory', 'SubcategoryController');
     Route::apiResource('brand', 'BrandController');
     Route::apiResource('product', 'ProductController');
+    Route::apiResource('customer', 'CustomerController');
 
 });

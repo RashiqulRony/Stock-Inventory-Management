@@ -28,6 +28,9 @@ import ProductCreate        from '../components/product/Create'
 import ProductEdit          from '../components/product/Edit'
 import ProductView          from '../components/product/View'
 
+import Customer             from '../components/customer/Index'
+import CustomerCreate       from '../components/customer/Create'
+import CustomerEdit         from '../components/customer/Edit'
 
 const router =  new Router({
     mode: 'history',
@@ -134,6 +137,24 @@ const router =  new Router({
             name: "ProductView",
             components: {'default': ProductView, 'header': Header, 'footer': Footer},
             meta: {requiresAuth: true, title: 'Product View'}
+        },
+        {
+            path: "/customer",
+            name: "Customer",
+            components: {'default': Customer, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Customer'}
+        },
+        {
+            path: "/customer/create",
+            name: "CustomerCreate",
+            components: {'default': CustomerCreate, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Customer Create'}
+        },
+        {
+            path: "/customer/edit/:id",
+            name: "CustomerEdit",
+            components: {'default': CustomerEdit, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Customer Edit'}
         },
         {
             path: "/:catchAll(.*)",
