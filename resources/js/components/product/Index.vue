@@ -20,6 +20,17 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            <form @submit.prevent="getData" class="mb-3">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" v-model="filter" class="form-control" placeholder="Name, Category, Subcategory, Brand">
+                                    </div>
+
+                                    <div class="col">
+                                        <button style="height: 45px" class="btn btn-outline-success">Search</button>
+                                    </div>
+                                </div>
+                            </form>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -36,7 +47,7 @@
                                     </thead>
                                     <tbody>
                                     <tr v-for="(row, index) in allData.data" :key="index">
-                                        <th scope="row">{{ index + 1 }}</th>
+                                        <th scope="row">{{ ((allData.current_page - 1) * allData.per_page + index) + 1 }}</th>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <img v-if="row.image" :src="assetPath + '/product/' +row.image" class="img-fluid rounded avatar-50 mr-3" :alt="row.name">
@@ -72,17 +83,26 @@
                         </div>
                     </div>
                 </div>
+                <div v-if="allData.links" class="col-md-12 col-lg-12 col-sm-12">
+                    <Pagination v-on:changepage="getData($event)" :from="allData.from" :to="allData.to" :total="allData.total" :links="allData.links" :currentPage="allData.current_page"/>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import Pagination from "../share/Pagination";
+
 export default {
+    components: {
+        Pagination
+    },
 
     data() {
         return {
-            allData: []
+            allData: [],
+            filter: '',
         }
     },
 
@@ -92,8 +112,8 @@ export default {
 
     methods:{
 
-        getData() {
-            axios.get(Api.product, { headers: store.getters.headers })
+        getData(page = 1) {
+            axios.get(Api.product + '?page='+page+'&filter='+this.filter, { headers: store.getters.headers })
                 .then((response) => response.data)
                 .then((response) => {
                     if (response.status === true) {

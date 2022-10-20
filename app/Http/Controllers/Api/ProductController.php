@@ -21,16 +21,23 @@ class ProductController extends Controller
         $this->_authUser = auth('api')->user();
     }
 
-    public function index()
+    public function index(Request  $request)
     {
         try {
-            $data = Product::with('variants')->where('products.user_id', $this->_authUser->id)
+            $sql = Product::with('variants')->where('products.user_id', $this->_authUser->id)
                 ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
                 ->leftJoin('subcategories', 'products.subcategory_id', '=', 'subcategories.id')
                 ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
-                ->select('products.*', 'categories.title as category_title', 'subcategories.title as subcategory_title', 'brands.title as brand_title')
-                ->orderBy('products.id', 'desc')
-                ->paginate(25);
+                ->select('products.*', 'categories.title as category_title', 'subcategories.title as subcategory_title', 'brands.title as brand_title');
+
+            if (isset($request->filter)) {
+                $sql->where('name', 'LIKE', '%' . $request->filter . '%');
+                $sql->orWhere('categories.title', 'LIKE', '%' . $request->filter . '%');
+                $sql->orWhere('subcategories.title', 'LIKE', '%' . $request->filter . '%');
+                $sql->orWhere('brands.title', 'LIKE', '%' . $request->filter . '%');
+            }
+
+            $data = $sql->orderBy('products.id', 'desc')->paginate(25);
 
             return response()->json([
                 'status'  => true,

@@ -83,8 +83,8 @@
                             </router-link>
                         </li>
 
-                        <li class=" ">
-                            <a href="#sale" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                        <li class=" " :class="{active : this.$route.name === 'Sale'}">
+                            <router-link :to="'/sale'" class="">
                                 <svg class="svg-icon" id="p-dash4" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -92,85 +92,7 @@
                                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                                 </svg>
                                 <span class="ml-4">Sale</span>
-                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline>
-                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                                </svg>
-                            </a>
-                            <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class="">
-                                    <a href="page-list-sale.html">
-                                        <i class="las la-minus"></i><span>List Sale</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="page-add-sale.html">
-                                        <i class="las la-minus"></i><span>Add Sale</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class=" ">
-                            <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                     stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                                    <line x1="1" y1="10" x2="23" y2="10"></line>
-                                </svg>
-                                <span class="ml-4">Purchases</span>
-                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline>
-                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                                </svg>
-                            </a>
-                            <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class="">
-                                    <a href="page-list-purchase.html">
-                                        <i class="las la-minus"></i><span>List Purchases</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="page-add-purchase.html">
-                                        <i class="las la-minus"></i><span>Add purchase</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class=" ">
-                            <a href="#return" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash6" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                     stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="4 14 10 14 10 20"></polyline>
-                                    <polyline points="20 10 14 10 14 4"></polyline>
-                                    <line x1="14" y1="10" x2="21" y2="3"></line>
-                                    <line x1="3" y1="21" x2="10" y2="14"></line>
-                                </svg>
-                                <span class="ml-4">Returns</span>
-                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline>
-                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                                </svg>
-                            </a>
-                            <ul id="return" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class="">
-                                    <a href="page-list-returns.html">
-                                        <i class="las la-minus"></i><span>List Returns</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="page-add-return.html">
-                                        <i class="las la-minus"></i><span>Add Return</span>
-                                    </a>
-                                </li>
-                            </ul>
+                            </router-link>
                         </li>
                         <li class=" " :class="{active : this.$route.name === 'Customer'}">
                             <router-link :to="'/customer'" class="">

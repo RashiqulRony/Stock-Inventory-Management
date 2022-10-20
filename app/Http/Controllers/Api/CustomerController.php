@@ -20,10 +20,17 @@ class CustomerController extends Controller
         $this->_authUser = auth('api')->user();
     }
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $data = Customer::where('user_id', $this->_authUser->id)->orderBy('id', 'desc')->get();
+            $sql = Customer::where('user_id', $this->_authUser->id)->orderBy('id', 'desc');
+            if (isset($request->filter)) {
+                $sql->where('name', 'LIKE', '%' . $request->filter . '%');
+                $sql->orWhere('email', 'LIKE', '%' . $request->filter . '%');
+                $sql->orWhere('phone', 'LIKE', '%' . $request->filter . '%');
+                $sql->orWhere('address', 'LIKE', '%' . $request->filter . '%');
+            }
+            $data = $sql->paginate(25);
 
             return response()->json([
                 'status'  => true,

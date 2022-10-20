@@ -32,6 +32,8 @@ import Customer             from '../components/customer/Index'
 import CustomerCreate       from '../components/customer/Create'
 import CustomerEdit         from '../components/customer/Edit'
 
+import Sale                 from '../components/sale/Index'
+
 const router =  new Router({
     mode: 'history',
     linkExactActiveClass: "active",
@@ -155,6 +157,12 @@ const router =  new Router({
             name: "CustomerEdit",
             components: {'default': CustomerEdit, 'header': Header, 'footer': Footer},
             meta: {requiresAuth: true, title: 'Customer Edit'}
+        },
+        {
+            path: "/sale",
+            name: "Sale",
+            components: {'default': Sale, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Sale'}
         },
         {
             path: "/:catchAll(.*)",
