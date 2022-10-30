@@ -6310,11 +6310,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _share_Pagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../share/Pagination */ "./resources/js/components/share/Pagination.vue");
+/* harmony import */ var vue_laravel_paginate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-laravel-paginate */ "./node_modules/vue-laravel-paginate/dist/vue-laravel-paginate.esm.js");
+// import Pagination from "../share/Pagination";
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Pagination: _share_Pagination__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Paginate: vue_laravel_paginate__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
@@ -10306,7 +10307,7 @@ var render = function render() {
     }, [_vm._v("Delete")])], 1)])])])]);
   }), 0)])])])])]), _vm._v(" "), _vm.allData.links ? _c("div", {
     staticClass: "col-md-12 col-lg-12 col-sm-12"
-  }, [_c("Pagination", {
+  }, [_c("Paginate", {
     attrs: {
       from: _vm.allData.from,
       to: _vm.allData.to,
@@ -38169,6 +38170,293 @@ module.exports = function (list, options) {
     lastIdentifiers = newLastIdentifiers;
   };
 };
+
+/***/ }),
+
+/***/ "./node_modules/vue-laravel-paginate/dist/vue-laravel-paginate.esm.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/vue-laravel-paginate/dist/vue-laravel-paginate.esm.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ entry_esm)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script = {
+  name: "VuePagination",
+  props: {
+    links: Array,
+    currentPage: Number,
+    from: Number,
+    to: Number,
+    total: Number
+  },
+  methods: {
+    pageChange(page) {
+      if (page === 'Next &raquo;') {
+        page = this.currentPage + 1;
+      } else if (page === '&laquo; Previous') {
+        page = this.currentPage - 1;
+      }
+      this.$emit('changepage', page);
+    }
+  }
+};
+
+function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+    if (typeof shadowMode !== 'boolean') {
+        createInjectorSSR = createInjector;
+        createInjector = shadowMode;
+        shadowMode = false;
+    }
+    // Vue.extend constructor export interop.
+    const options = typeof script === 'function' ? script.options : script;
+    // render functions
+    if (template && template.render) {
+        options.render = template.render;
+        options.staticRenderFns = template.staticRenderFns;
+        options._compiled = true;
+        // functional template
+        if (isFunctionalTemplate) {
+            options.functional = true;
+        }
+    }
+    // scopedId
+    if (scopeId) {
+        options._scopeId = scopeId;
+    }
+    let hook;
+    if (moduleIdentifier) {
+        // server build
+        hook = function (context) {
+            // 2.3 injection
+            context =
+                context || // cached call
+                    (this.$vnode && this.$vnode.ssrContext) || // stateful
+                    (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
+            // 2.2 with runInNewContext: true
+            if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                context = __VUE_SSR_CONTEXT__;
+            }
+            // inject component styles
+            if (style) {
+                style.call(this, createInjectorSSR(context));
+            }
+            // register component module identifier for async chunk inference
+            if (context && context._registeredComponents) {
+                context._registeredComponents.add(moduleIdentifier);
+            }
+        };
+        // used by ssr in case component is cached and beforeCreate
+        // never gets called
+        options._ssrRegister = hook;
+    }
+    else if (style) {
+        hook = shadowMode
+            ? function (context) {
+                style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
+            }
+            : function (context) {
+                style.call(this, createInjector(context));
+            };
+    }
+    if (hook) {
+        if (options.functional) {
+            // register for functional component in vue file
+            const originalRender = options.render;
+            options.render = function renderWithStyleInjection(h, context) {
+                hook.call(context);
+                return originalRender(h, context);
+            };
+        }
+        else {
+            // inject component registration as beforeCreate hook
+            const existing = options.beforeCreate;
+            options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+        }
+    }
+    return script;
+}
+
+const isOldIE = typeof navigator !== 'undefined' &&
+    /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+function createInjector(context) {
+    return (id, style) => addStyle(id, style);
+}
+let HEAD;
+const styles = {};
+function addStyle(id, css) {
+    const group = isOldIE ? css.media || 'default' : id;
+    const style = styles[group] || (styles[group] = { ids: new Set(), styles: [] });
+    if (!style.ids.has(id)) {
+        style.ids.add(id);
+        let code = css.source;
+        if (css.map) {
+            // https://developer.chrome.com/devtools/docs/javascript-debugging
+            // this makes source maps inside style tags work properly in Chrome
+            code += '\n/*# sourceURL=' + css.map.sources[0] + ' */';
+            // http://stackoverflow.com/a/26603875
+            code +=
+                '\n/*# sourceMappingURL=data:application/json;base64,' +
+                    btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) +
+                    ' */';
+        }
+        if (!style.element) {
+            style.element = document.createElement('style');
+            style.element.type = 'text/css';
+            if (css.media)
+                style.element.setAttribute('media', css.media);
+            if (HEAD === undefined) {
+                HEAD = document.head || document.getElementsByTagName('head')[0];
+            }
+            HEAD.appendChild(style.element);
+        }
+        if ('styleSheet' in style.element) {
+            style.styles.push(code);
+            style.element.styleSheet.cssText = style.styles
+                .filter(Boolean)
+                .join('\n');
+        }
+        else {
+            const index = style.ids.size - 1;
+            const textNode = document.createTextNode(code);
+            const nodes = style.element.childNodes;
+            if (nodes[index])
+                style.element.removeChild(nodes[index]);
+            if (nodes.length)
+                style.element.insertBefore(textNode, nodes[index]);
+            else
+                style.element.appendChild(textNode);
+        }
+    }
+}
+
+/* script */
+const __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c('div', {
+    staticClass: "row paginate"
+  }, [_vm.from && _vm.to && _vm.total ? _c('div', {
+    staticClass: "col-md-3"
+  }, [_c('p', {
+    staticClass: "mt-1"
+  }, [_vm._v("Showing " + _vm._s(_vm.from) + " to " + _vm._s(_vm.to) + " of " + _vm._s(_vm.total) + " entries")])]) : _vm._e(), _vm._v(" "), _c('div', {
+    class: _vm.from && _vm.to && _vm.total ? 'col-md-9' : 'col-md-12'
+  }, [_vm.links.length > 3 ? _c('nav', [_c('ul', {
+    staticClass: "pagination"
+  }, [_vm._l(_vm.links, function (link, key) {
+    return [link.url === null ? _c('li', {
+      key: key,
+      staticClass: "page-item disabled",
+      attrs: {
+        "aria-current": "page"
+      }
+    }, [_c('span', {
+      staticClass: "page-link",
+      domProps: {
+        "innerHTML": _vm._s(link.label)
+      }
+    })]) : _c('li', {
+      key: key,
+      staticClass: "page-item",
+      class: {
+        'active': link.active
+      }
+    }, [_c('a', {
+      staticClass: "page-link",
+      staticStyle: {
+        "cursor": "pointer"
+      },
+      domProps: {
+        "innerHTML": _vm._s(link.label)
+      },
+      on: {
+        "click": function ($event) {
+          return _vm.pageChange(link.label);
+        }
+      }
+    })])];
+  })], 2)]) : _vm._e()])]);
+};
+var __vue_staticRenderFns__ = [];
+
+/* style */
+const __vue_inject_styles__ = function (inject) {
+  if (!inject) return;
+  inject("data-v-0aefa5a9_0", {
+    source: ".paginate[data-v-0aefa5a9]{padding:10px}.pagination[data-v-0aefa5a9]{float:right}",
+    map: undefined,
+    media: undefined
+  });
+};
+/* scoped */
+const __vue_scope_id__ = "data-v-0aefa5a9";
+/* module identifier */
+const __vue_module_identifier__ = undefined;
+/* functional template */
+const __vue_is_functional_template__ = false;
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+const __vue_component__ = /*#__PURE__*/normalizeComponent({
+  render: __vue_render__,
+  staticRenderFns: __vue_staticRenderFns__
+}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, createInjector, undefined, undefined);
+var component = __vue_component__;
+
+// Import vue component
+
+// Default export is installable instance of component.
+// IIFE injects install function into component, allowing component
+// to be registered via Vue.use() as well as Vue.component(),
+var entry_esm = /*#__PURE__*/(() => {
+  // Get component instance
+  const installable = component;
+
+  // Attach install function executed by Vue.use()
+  installable.install = Vue => {
+    Vue.component('VueLaravelPaginate', installable);
+  };
+  return installable;
+})();
+
+// It's possible to expose named exports when writing components that can
+// also be used as directives, etc. - eg. import { RollupDemoDirective } from 'rollup-demo';
+// export const RollupDemoDirective = directive;
+
+
+
 
 /***/ }),
 
