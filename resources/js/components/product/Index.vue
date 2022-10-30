@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div v-if="allData.links" class="col-md-12 col-lg-12 col-sm-12">
-                    <Pagination v-on:changepage="getData($event)" :from="allData.from" :to="allData.to" :total="allData.total" :links="allData.links" :currentPage="allData.current_page"/>
+                    <Paginate v-on:changepage="getData($event)" :from="allData.from" :to="allData.to" :total="allData.total" :links="allData.links" :currentPage="allData.current_page"/>
                 </div>
             </div>
         </div>
@@ -92,11 +92,11 @@
 </template>
 
 <script>
-import Pagination from "../share/Pagination";
+import Paginate from "vue-laravel-paginate";
 
 export default {
     components: {
-        Pagination
+        Paginate
     },
 
     data() {

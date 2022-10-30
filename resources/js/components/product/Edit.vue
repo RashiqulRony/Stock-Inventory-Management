@@ -117,19 +117,7 @@
                                         <input type="text" v-model="variant.size" class="form-control" placeholder="size">
                                     </div>
                                     <div class="col">
-                                        <input type="number" min="1" v-model="variant.pieces" class="form-control" placeholder="pieces">
-                                    </div>
-                                    <div class="col">
                                         <input type="text" v-model="variant.weight" class="form-control" placeholder="weight">
-                                    </div>
-                                    <div class="col">
-                                        <input type="number" required step="0.01" min="1" max="99999999" v-model="variant.cost" class="form-control" placeholder="cost">
-                                    </div>
-                                    <div class="col">
-                                        <input type="number" required step="0.01" min="1" max="99999999" v-model="variant.price" class="form-control" placeholder="price">
-                                    </div>
-                                    <div class="col">
-                                        <input type="number" required min="1" max="99999999" v-model="variant.stock" class="form-control" placeholder="stock">
                                     </div>
                                     <div class="col">
                                         <button style="float: right; height: 45px;" v-if="index !== 0" @click="remove(index)" type="button" class="btn btn-outline-danger">Remove</button>
@@ -177,10 +165,6 @@ export default {
                 color: "",
                 size: "",
                 weight: "",
-                cost: "",
-                price: "",
-                stock: "",
-                pieces: "",
             }],
             categories: [],
             subcategories: [],

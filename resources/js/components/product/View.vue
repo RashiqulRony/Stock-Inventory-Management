@@ -70,22 +70,14 @@
                                 <th>Code</th>
                                 <th>Color</th>
                                 <th>Size</th>
-                                <th>Pieces</th>
                                 <th>Weight</th>
-                                <th>Cost</th>
-                                <th>Price</th>
-                                <th>Stock</th>
                             </tr>
                             <template v-if="data.variants.length > 0">
                                 <tr v-for="(variant, index) in data.variants" :key="'vt'+index">
                                     <td>{{ variant.code }}</td>
                                     <td>{{ variant.color }}</td>
                                     <td>{{ variant.size }}</td>
-                                    <td>{{ variant.pieces }}</td>
                                     <td>{{ variant.weight }}</td>
-                                    <td>{{ variant.cost }}</td>
-                                    <td>{{ variant.price }}</td>
-                                    <td>{{ variant.stock }}</td>
                                 </tr>
                             </template>
 

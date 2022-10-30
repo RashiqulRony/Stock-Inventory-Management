@@ -97,11 +97,7 @@ class ProductController extends Controller
                         'code'       => $variant['code'],
                         'color'      => $variant['color'],
                         'size'       => $variant['size'],
-                        'pieces'     => $variant['pieces'],
                         'weight'     => $variant['weight'],
-                        'cost'       => $variant['cost'],
-                        'price'      => $variant['price'],
-                        'stock'      => $variant['stock'],
                     ];
                 }
                 ProductVariant::insert($productV);
@@ -190,11 +186,7 @@ class ProductController extends Controller
                         'code'       => $variant['code'],
                         'color'      => $variant['color'],
                         'size'       => $variant['size'],
-                        'pieces'     => $variant['pieces'],
                         'weight'     => $variant['weight'],
-                        'cost'       => $variant['cost'],
-                        'price'      => $variant['price'],
-                        'stock'      => $variant['stock'],
                     ];
                 }
                 ProductVariant::insert($productV);
