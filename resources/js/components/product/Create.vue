@@ -114,6 +114,20 @@
                                         <input type="text" v-model="variant.weight" class="form-control" placeholder="weight">
                                     </div>
                                     <div class="col">
+                                        <input type="number" step="0.01" min="1" max="99999999" v-model="variant.price" class="form-control" placeholder="price">
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" :id="'variantImg_'+index" accept="image/*" class="custom-file-input">
+                                                <label class="custom-file-label selected" for="image"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
                                         <button style="float: right; height: 45px;" v-if="index !== 0" @click="remove(index)" type="button" class="btn btn-outline-danger">Remove</button>
                                         <button style="float: right; height: 45px;" v-else @click="addMore()" type="button" class="btn btn-outline-success">Add More</button>
                                     </div>
@@ -158,6 +172,8 @@ export default {
                 color: "",
                 size: "",
                 weight: "",
+                price: "",
+                image: "",
             }],
             categories: [],
             subcategories: [],
@@ -187,6 +203,20 @@ export default {
                     alert('This file is not an image')
                 }
             }
+
+            if (this.variants.length > 0) {
+                for (let i = 0; i < this.variants.length; i++) {
+                    let variantImg = document.getElementById("variantImg_"+i).files[0];
+                    if (variantImg !== undefined){
+                        if(variantImg.type === 'image/jpeg' || variantImg.type === 'image/png' || variantImg.type === 'image/webp' || variantImg.type === 'image/gif'){
+                            postData.append('variant_images['+i+']', variantImg);
+                        }else {
+                            alert('This file is not an image')
+                        }
+                    }
+                }
+            }
+
             postData.append('category', this.product.category);
             postData.append('subcategory', this.product.subcategory);
             postData.append('brand', this.product.brand);

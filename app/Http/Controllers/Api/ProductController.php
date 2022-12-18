@@ -13,11 +13,13 @@ class ProductController extends Controller
 {
     use ImageUpload;
     public $_filePath = '';
+    public $_productVariants = '';
     public $_authUser = null;
 
     public function __construct()
     {
         $this->_filePath = auth('api')->user()->domain.'/product';
+        $this->_productVariants = auth('api')->user()->domain.'/product/variant';
         $this->_authUser = auth('api')->user();
     }
 
@@ -91,15 +93,27 @@ class ProductController extends Controller
             if ($product) {
                 $variants = json_decode($request->variants, true);
                 $productV = [];
-                foreach ($variants as $variant) {
+                foreach ($variants as $key => $variant) {
+                    if ($request->hasFile('variant_images')) {
+                        $variantImg = $request->file('variant_images');
+                        if (isset($variantImg[$key])) {
+                            $file  = $this->imageUpload($variantImg[$key], $this->_productVariants, '');
+                            $variantImage = $file['name'];
+                        } else {
+                            $variantImage = null;
+                        }
+                    }
                     $productV[] = [
                         'product_id' => $product->id,
                         'code'       => $variant['code'],
                         'color'      => $variant['color'],
                         'size'       => $variant['size'],
                         'weight'     => $variant['weight'],
+                        'price'      => $variant['price'],
+                        'image'      => $variantImage ?? null,
                     ];
                 }
+
                 ProductVariant::insert($productV);
             }
 
@@ -225,3 +239,6 @@ class ProductController extends Controller
         }
     }
 }
+
+
+// "SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect decimal value: 'zxvad' for column `ron_inve`.`product_variants`.`price` at row 1 (SQL: insert into `product_variants` (`code`, `color`, `image`, `price`, `product_id`, `size`, `weight`) values (wrwerew, werwer, 1671359690-confidence.jpg, zxvad, 7, wsdafas, zxvad), (1234, asfasdf, 1671359690-image-2022-12-04t10-52-07-954z.png, asdfasdf, 7, 24, asdfasdf))"

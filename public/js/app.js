@@ -6430,7 +6430,9 @@ __webpack_require__.r(__webpack_exports__);
         code: "",
         color: "",
         size: "",
-        weight: ""
+        weight: "",
+        price: "",
+        image: ""
       }],
       categories: [],
       subcategories: [],
@@ -6457,6 +6459,18 @@ __webpack_require__.r(__webpack_exports__);
           postData.append('image', image);
         } else {
           alert('This file is not an image');
+        }
+      }
+      if (this.variants.length > 0) {
+        for (var i = 0; i < this.variants.length; i++) {
+          var variantImg = document.getElementById("variantImg_" + i).files[0];
+          if (variantImg !== undefined) {
+            if (variantImg.type === 'image/jpeg' || variantImg.type === 'image/png' || variantImg.type === 'image/webp' || variantImg.type === 'image/gif') {
+              postData.append('variant_images[' + i + ']', variantImg);
+            } else {
+              alert('This file is not an image');
+            }
+          }
         }
       }
       postData.append('category', this.product.category);
@@ -10687,6 +10701,50 @@ var render = function render() {
       }
     })]), _vm._v(" "), _c("div", {
       staticClass: "col"
+    }, [_c("input", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: variant.price,
+        expression: "variant.price"
+      }],
+      staticClass: "form-control",
+      attrs: {
+        type: "number",
+        step: "0.01",
+        min: "1",
+        max: "99999999",
+        placeholder: "price"
+      },
+      domProps: {
+        value: variant.price
+      },
+      on: {
+        input: function input($event) {
+          if ($event.target.composing) return;
+          _vm.$set(variant, "price", $event.target.value);
+        }
+      }
+    })]), _vm._v(" "), _c("div", {
+      staticClass: "col"
+    }, [_c("div", {
+      staticClass: "input-group"
+    }, [_vm._m(2, true), _vm._v(" "), _c("div", {
+      staticClass: "custom-file"
+    }, [_c("input", {
+      staticClass: "custom-file-input",
+      attrs: {
+        type: "file",
+        id: "variantImg_" + index,
+        accept: "image/*"
+      }
+    }), _vm._v(" "), _c("label", {
+      staticClass: "custom-file-label selected",
+      attrs: {
+        "for": "image"
+      }
+    })])])]), _vm._v(" "), _c("div", {
+      staticClass: "col"
     }, [index !== 0 ? _c("button", {
       staticClass: "btn btn-outline-danger",
       staticStyle: {
@@ -10716,7 +10774,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("Add More")])])]);
-  }), _vm._v(" "), _vm._m(2)], 2)])])])])])]);
+  }), _vm._v(" "), _vm._m(3)], 2)])])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -10761,6 +10819,14 @@ var staticRenderFns = [function () {
       "for": "image"
     }
   })])])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "input-group-prepend"
+  }, [_c("span", {
+    staticClass: "input-group-text"
+  }, [_vm._v("Upload")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
