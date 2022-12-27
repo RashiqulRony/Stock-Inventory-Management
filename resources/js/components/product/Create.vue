@@ -113,7 +113,7 @@
                                     <div class="col">
                                         <input type="text" v-model="variant.weight" class="form-control" placeholder="weight">
                                     </div>
-                                    <div class="col">
+<!--                                    <div class="col">
                                         <input type="number" step="0.01" min="1" max="99999999" v-model="variant.price" class="form-control" placeholder="price">
                                     </div>
                                     <div class="col">
@@ -126,7 +126,7 @@
                                                 <label class="custom-file-label selected" for="image"></label>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="col">
                                         <button style="float: right; height: 45px;" v-if="index !== 0" @click="remove(index)" type="button" class="btn btn-outline-danger">Remove</button>
                                         <button style="float: right; height: 45px;" v-else @click="addMore()" type="button" class="btn btn-outline-success">Add More</button>
@@ -172,8 +172,6 @@ export default {
                 color: "",
                 size: "",
                 weight: "",
-                price: "",
-                image: "",
             }],
             categories: [],
             subcategories: [],
@@ -204,7 +202,7 @@ export default {
                 }
             }
 
-            if (this.variants.length > 0) {
+            /*if (this.variants.length > 0) {
                 for (let i = 0; i < this.variants.length; i++) {
                     let variantImg = document.getElementById("variantImg_"+i).files[0];
                     if (variantImg !== undefined){
@@ -215,7 +213,7 @@ export default {
                         }
                     }
                 }
-            }
+            }*/
 
             postData.append('category', this.product.category);
             postData.append('subcategory', this.product.subcategory);

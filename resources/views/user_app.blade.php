@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>POS Dash </title>
     <link href="{{ mix('assets/css/all.css') }}" rel="stylesheet">
+    <link href="{{ mix('assets/css/custom.css') }}" rel="stylesheet">
 
 <body class="">
 <div id="app">

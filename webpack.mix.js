@@ -13,7 +13,8 @@ const assets = 'public/assets/';
 
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/custom.scss', assets+'/css');
 
 
 mix.styles([

@@ -1,9 +1,36 @@
-.vs__dropdown-toggle{
-    height: 45px;
-    line-height: 45px;
-    background: #fff;
-    border: 1px solid #DCDFE8;
-    font-size: 14px;
-    color: #676E8A;
-    border-radius: 10px!important;
+.vs__dropdown-toggle {
+  height: 45px;
+  line-height: 45px;
+  background: #fff;
+  border: 1px solid #DCDFE8;
+  font-size: 14px;
+  color: #676E8A;
+  border-radius: 10px !important;
+}
+
+html, .content-page, .iq-footer {
+  background-color: #efefef;
+}
+
+.iq-sidebar {
+  background-color: #212529;
+}
+.iq-sidebar .iq-sidebar-menu .iq-menu li a {
+  color: #fff;
+}
+.iq-sidebar .iq-sidebar-menu .iq-menu li a:hover {
+  color: #FF7E41 !important;
+}
+.iq-sidebar .iq-sidebar-menu .iq-menu > li.active > a {
+  color: #e14800;
+}
+
+.wrapper-menu {
+  color: #fff;
+}
+
+@media only screen and (max-width: 1299px) {
+  .wrapper-menu {
+    color: #00836a;
+  }
 }

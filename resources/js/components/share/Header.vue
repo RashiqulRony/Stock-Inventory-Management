@@ -11,15 +11,15 @@
                         <h5 class="logo-title ml-3">{{ this.domainName }}</h5>
                     </template>
                 </a>
-                <div class="iq-menu-bt-sidebar ml-0">
-                    <i class="las la-bars wrapper-menu"></i>
+                <div @click="menuSlideShow()" class="iq-menu-bt-sidebar ml-0">
+                    <i class="las la-bars wrapper-menu" :class="menuSlide === true ? 'menuSlide' : ''"></i>
                 </div>
             </div>
             <div class="data-scrollbar" data-scroll="1">
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li class="" :class="{active : this.$route.name === 'Dashboard'}">
-                            <router-link :to="'/dashboard'" class="svg-icon" >
+                            <router-link :to="{ name: 'Dashboard'}" class="svg-icon" >
                                 <svg class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -32,7 +32,7 @@
                             </router-link>
                         </li>
                         <li class="" :class="{active : this.$route.name === 'Category'}">
-                            <router-link :to="'/category'" class="">
+                            <router-link :to="{ name: 'Category'}" class="">
                                 <svg class="svg-icon" id="p-dash3" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -43,7 +43,7 @@
                             </router-link>
                         </li>
                         <li class="" :class="{active : this.$route.name === 'Subcategory'}">
-                            <router-link :to="'/subcategory'" class="">
+                            <router-link :to="{ name: 'Subcategory'}" class="">
                                 <svg class="svg-icon" id="p-dash3" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -55,7 +55,7 @@
                         </li>
 
                         <li class="" :class="{active : this.$route.name === 'Brand'}">
-                            <router-link :to="'/brand'" class="">
+                            <router-link :to="{ name: 'Brand'}" class="">
                                 <svg class="svg-icon" id="p-dash7" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -71,7 +71,7 @@
 
 
                         <li class="" :class="{active : this.$route.name === 'Product'}">
-                            <router-link :to="'/product'" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                            <router-link :to="{ name: 'Product'}" class="collapsed" data-toggle="collapse" aria-expanded="false">
                                 <svg class="svg-icon" id="p-dash2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -84,7 +84,7 @@
                         </li>
 
                         <li class=" " :class="{active : this.$route.name === 'Sale'}">
-                            <router-link :to="'/sale'" class="">
+                            <router-link :to="{ name: 'Sale'}" class="">
                                 <svg class="svg-icon" id="p-dash4" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -95,7 +95,7 @@
                             </router-link>
                         </li>
                         <li class=" " :class="{active : this.$route.name === 'Customer'}">
-                            <router-link :to="'/customer'" class="">
+                            <router-link :to="{ name: 'Customer'}" class="">
                                 <svg class="svg-icon" id="p-dash8" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -412,7 +412,11 @@
 
 <script>
     export default {
-
+        data() {
+            return {
+                menuSlide: false,
+            }
+        },
         mounted() {
         },
 
@@ -424,6 +428,20 @@
                     _this.$router.push({ path: `/` });
                 }, 1000)
             },
+
+            menuSlideShow() {
+                let windowWidth = window.innerWidth
+                if (windowWidth > 1299){
+                    this.menuSlide = this.menuSlide === false;
+                }
+            },
+
         }
     }
 </script>
+
+<style scoped>
+    .menuSlide {
+        margin: 0 100px;
+    }
+</style>

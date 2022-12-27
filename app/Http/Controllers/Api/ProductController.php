@@ -94,7 +94,7 @@ class ProductController extends Controller
                 $variants = json_decode($request->variants, true);
                 $productV = [];
                 foreach ($variants as $key => $variant) {
-                    if ($request->hasFile('variant_images')) {
+                    /*if ($request->hasFile('variant_images')) {
                         $variantImg = $request->file('variant_images');
                         if (isset($variantImg[$key])) {
                             $file  = $this->imageUpload($variantImg[$key], $this->_productVariants, '');
@@ -102,15 +102,13 @@ class ProductController extends Controller
                         } else {
                             $variantImage = null;
                         }
-                    }
+                    }*/
                     $productV[] = [
                         'product_id' => $product->id,
                         'code'       => $variant['code'],
                         'color'      => $variant['color'],
                         'size'       => $variant['size'],
                         'weight'     => $variant['weight'],
-                        'price'      => $variant['price'],
-                        'image'      => $variantImage ?? null,
                     ];
                 }
 
