@@ -15,8 +15,8 @@
                     <div class="card card-transparent card-block card-stretch card-height border-none">
                         <div class="card-body p-0 mt-lg-2 mt-0">
                             <div class="LCD">
-                                <div style="letter-spacing: 7px;" id="clock"></div> <br>
-                                <div style="font-size: 30px;" id="today"></div>
+                                <div style="letter-spacing: 7px;" id="clock"> {{ clock }}</div> <br>
+                                <div style="font-size: 30px;" id="today"> {{ today }}</div>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,9 @@
 export default {
     data() {
         return {
-            message: ''
+            message: '',
+            clock: '',
+            today: '',
         }
     },
     mounted() {
@@ -135,8 +137,10 @@ export default {
             mm = (mm < 10) ? "0" + mm : mm;
             ss = (ss < 10) ? "0" + ss : ss;
 
-            document.getElementById("clock").innerText = hh + ":" + mm + ":" + ss + " " + session;
-            document.getElementById("today").innerText = todayDate;
+            // document.getElementById("clock").innerText = hh + ":" + mm + ":" + ss + " " + session;
+            this.clock = hh + ":" + mm + ":" + ss + " " + session;
+            // document.getElementById("today").innerText = todayDate;
+            this.today = todayDate
 
         }
     }

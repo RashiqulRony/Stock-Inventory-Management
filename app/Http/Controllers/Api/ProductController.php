@@ -103,8 +103,14 @@ class ProductController extends Controller
                             $variantImage = null;
                         }
                     }*/
+                    $rand = date('Ymd').rand(00, 99);
+                    $str = (string)$product->id;
+                    $idRand = (int)substr($str, -1);
+                    $barcode = $rand.$idRand.$key;
+
                     $productV[] = [
                         'product_id' => $product->id,
+                        'barcode'    => $barcode,
                         'code'       => $variant['code'],
                         'color'      => $variant['color'],
                         'size'       => $variant['size'],
@@ -192,9 +198,16 @@ class ProductController extends Controller
                 ProductVariant::where('product_id', $data->id)->delete();
                 $variants = json_decode($request->variants, true);
                 $productV = [];
-                foreach ($variants as $variant) {
+
+                foreach ($variants as $key => $variant) {
+                    $rand = date('Ymd').rand(00, 99);
+                    $str = (string)$data->id;
+                    $idRand = (int)substr($str, -1);
+                    $barcode = $rand.$idRand.$key;
+
                     $productV[] = [
                         'product_id' => $data->id,
+                        'barcode'    => $barcode,
                         'code'       => $variant['code'],
                         'color'      => $variant['color'],
                         'size'       => $variant['size'],

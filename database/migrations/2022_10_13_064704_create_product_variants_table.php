@@ -17,6 +17,7 @@ class CreateProductVariantsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->on('products')->references('id')->onDelete('cascade');
+            $table->string('barcode')->nullable();
             $table->string('code');
             $table->string('color')->nullable();
             $table->string('size')->nullable();

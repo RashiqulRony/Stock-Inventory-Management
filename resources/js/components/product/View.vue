@@ -71,6 +71,7 @@
                                 <th>Color</th>
                                 <th>Size</th>
                                 <th>Weight</th>
+                                <th>Barcode</th>
                             </tr>
                             <template v-if="data.variants.length > 0">
                                 <tr v-for="(variant, index) in data.variants" :key="'vt'+index">
@@ -78,9 +79,14 @@
                                     <td>{{ variant.color }}</td>
                                     <td>{{ variant.size }}</td>
                                     <td>{{ variant.weight }}</td>
+                                    <td>
+                                        <template v-if="variant.barcode">
+                                            <barcode height="100, 100" :value="variant.barcode"></barcode>
+                                        </template>
+
+                                    </td>
                                 </tr>
                             </template>
-
                         </table>
                     </div>
                 </div>
@@ -90,12 +96,16 @@
 </template>
 
 <script>
+import VueBarcode from 'vue-barcode';
 
 export default {
+    components: {
+        'barcode': VueBarcode
+    },
+
     data() {
         return {
             data: '',
-
         };
     },
 

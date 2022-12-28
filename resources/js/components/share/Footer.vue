@@ -11,7 +11,7 @@
                             </ul>
                         </div>
                         <div class="col-lg-6 text-right">
-                            <span class="mr-1">2022©</span> <a href="#" class="">POS Dash</a>.
+                            <span class="mr-1">2023 ©</span> <a href="#" class="">RonInve</a>.
                         </div>
                     </div>
                 </div>

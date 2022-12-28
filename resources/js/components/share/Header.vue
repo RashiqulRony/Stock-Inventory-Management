@@ -1,5 +1,13 @@
 <template>
     <div>
+        <template v-if="$store.getters.isLoading">
+            <div class="loading">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </template>
         <div class="iq-sidebar  sidebar-default ">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
                 <a :href="'/dashboard'" class="header-logo">
@@ -18,8 +26,8 @@
             <div class="data-scrollbar" data-scroll="1">
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
-                        <li class="" :class="{active : this.$route.name === 'Dashboard'}">
-                            <router-link :to="{ name: 'Dashboard'}" class="svg-icon" >
+                        <li :class="{active : this.$route.name === 'Dashboard'}">
+                            <a @click="changeRoute('Dashboard')">
                                 <svg class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -29,10 +37,10 @@
                                     <line x1="12" y1="22.08" x2="12" y2="12"></line>
                                 </svg>
                                 <span class="ml-4">Dashboards</span>
-                            </router-link>
+                            </a>
                         </li>
-                        <li class="" :class="{active : this.$route.name === 'Category'}">
-                            <router-link :to="{ name: 'Category'}" class="">
+                        <li :class="{active : this.$route.name === 'Category'}">
+                            <a @click="changeRoute('Category')">
                                 <svg class="svg-icon" id="p-dash3" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -40,10 +48,10 @@
                                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                                 </svg>
                                 <span class="ml-4">Categories</span>
-                            </router-link>
+                            </a>
                         </li>
-                        <li class="" :class="{active : this.$route.name === 'Subcategory'}">
-                            <router-link :to="{ name: 'Subcategory'}" class="">
+                        <li :class="{active : this.$route.name === 'Subcategory'}">
+                            <a @click="changeRoute('Subcategory')">
                                 <svg class="svg-icon" id="p-dash3" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -51,11 +59,11 @@
                                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                                 </svg>
                                 <span class="ml-4">Subcategories</span>
-                            </router-link>
+                            </a>
                         </li>
 
-                        <li class="" :class="{active : this.$route.name === 'Brand'}">
-                            <router-link :to="{ name: 'Brand'}" class="">
+                        <li :class="{active : this.$route.name === 'Brand'}">
+                            <a @click="changeRoute('Brand')" class="">
                                 <svg class="svg-icon" id="p-dash7" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -66,12 +74,12 @@
                                     <polyline points="10 9 9 9 8 9"></polyline>
                                 </svg>
                                 <span class="ml-4">Brands</span>
-                            </router-link>
+                            </a>
                         </li>
 
 
-                        <li class="" :class="{active : this.$route.name === 'Product'}">
-                            <router-link :to="{ name: 'Product'}" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                        <li :class="{active : this.$route.name === 'Product'}">
+                            <a @click="changeRoute('Product')">
                                 <svg class="svg-icon" id="p-dash2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -80,11 +88,21 @@
                                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                                 </svg>
                                 <span class="ml-4">Products</span>
-                            </router-link>
+                            </a>
                         </li>
 
-                        <li class=" " :class="{active : this.$route.name === 'Sale'}">
-                            <router-link :to="{ name: 'Sale'}" class="">
+                        <li :class="{active : this.$route.name === 'Purchase'}">
+                            <a @click="changeRoute('Purchase')">
+                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                                </svg>
+                                <span class="ml-4">Purchases</span>
+                            </a>
+                        </li>
+
+                        <li :class="{active : this.$route.name === 'Sale'}">
+                            <a @click="changeRoute('Sale')">
                                 <svg class="svg-icon" id="p-dash4" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -92,10 +110,10 @@
                                     <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
                                 </svg>
                                 <span class="ml-4">Sale</span>
-                            </router-link>
+                            </a>
                         </li>
-                        <li class=" " :class="{active : this.$route.name === 'Customer'}">
-                            <router-link :to="{ name: 'Customer'}" class="">
+                        <li :class="{active : this.$route.name === 'Customer'}">
+                            <a @click="changeRoute('Customer')">
                                 <svg class="svg-icon" id="p-dash8" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -105,10 +123,10 @@
                                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                 </svg>
                                 <span class="ml-4">Customers</span>
-                            </router-link>
+                            </a>
                         </li>
-                        <li class="">
-                            <a href="page-report.html" class="">
+                        <li>
+                            <a>
                                 <svg class="svg-icon" id="p-dash7" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                      stroke-linecap="round" stroke-linejoin="round">
@@ -146,10 +164,7 @@
                         </a>
                     </div>
                     <div class="iq-search-bar device-search">
-                        <form action="#" class="searchbox">
-                            <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                            <input type="text" class="text search-input" placeholder="Search here...">
-                        </form>
+
                     </div>
                     <div class="d-flex align-items-center">
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -159,122 +174,6 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                                <li class="nav-item nav-icon dropdown">
-                                    <a href="#" class="search-toggle dropdown-toggle btn border add-btn"
-                                       id="dropdownMenuButton02" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false">
-                                        <img :src="'/assets/images/small/flag-01.png'" alt="img-flag" class="img-fluid image-flag mr-2">En
-                                    </a>
-                                    <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                        <div class="card shadow-none m-0">
-                                            <div class="card-body p-3">
-                                                <a class="iq-sub-card" href="#"><img :src="'/assets/images/small/flag-02.png'" alt="img-flag" class="img-fluid mr-2">French</a>
-                                                <a class="iq-sub-card" href="#"><img :src="'/assets/images/small/flag-03.png'" alt="img-flag" class="img-fluid mr-2">Spanish</a>
-                                                <a class="iq-sub-card" href="#"><img :src="'/assets/images/small/flag-04.png'" alt="img-flag" class="img-fluid mr-2">Italian</a>
-                                                <a class="iq-sub-card" href="#"><img :src="'/assets/images/small/flag-05.png'" alt="img-flag" class="img-fluid mr-2">German</a>
-                                                <a class="iq-sub-card" href="#"><img :src="'/assets/images/small/flag-06.png'" alt="img-flag" class="img-fluid mr-2">Japanese</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn border add-btn shadow-none mx-2 d-none d-md-block"
-                                       data-toggle="modal" data-target="#new-order"><i class="las la-plus mr-2"></i>New
-                                        Order</a>
-                                </li>
-                                <li class="nav-item nav-icon search-content">
-                                    <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
-                                       aria-haspopup="true" aria-expanded="false">
-                                        <i class="ri-search-line"></i>
-                                    </a>
-                                    <div class="iq-search-bar iq-sub-dropdown dropdown-menu"
-                                         aria-labelledby="dropdownSearch">
-                                        <form action="#" class="searchbox p-2">
-                                            <div class="form-group mb-0 position-relative">
-                                                <input type="text" class="text search-input font-size-12"
-                                                       placeholder="type here to search...">
-                                                <a href="#" class="search-link"><i class="las la-search"></i></a>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </li>
-                                <li class="nav-item nav-icon dropdown">
-                                    <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton2"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                             stroke-linejoin="round" class="feather feather-mail">
-                                            <path
-                                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                            </path>
-                                            <polyline points="22,6 12,13 2,6"></polyline>
-                                        </svg>
-                                        <span class="bg-primary"></span>
-                                    </a>
-                                    <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                        <div class="card shadow-none m-0">
-                                            <div class="card-body p-0 ">
-                                                <div class="cust-title p-3">
-                                                    <div class="d-flex align-items-center justify-content-between">
-                                                        <h5 class="mb-0">All Messages</h5>
-                                                        <a class="badge badge-primary badge-card" href="#">3</a>
-                                                    </div>
-                                                </div>
-                                                <div class="px-3 pt-0 pb-0 sub-card">
-                                                    <a href="#" class="iq-sub-card">
-                                                        <div class="media align-items-center cust-card py-3 border-bottom">
-                                                            <div class="">
-                                                                <img class="avatar-50 rounded-small" :src="'/assets/images/user/01.jpg'" alt="01">
-                                                            </div>
-                                                            <div class="media-body ml-3">
-                                                                <div
-                                                                    class="d-flex align-items-center justify-content-between">
-                                                                    <h6 class="mb-0">Emma Watson</h6>
-                                                                    <small class="text-dark"><b>12 : 47 pm</b></small>
-                                                                </div>
-                                                                <small class="mb-0">Lorem ipsum dolor sit amet</small>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#" class="iq-sub-card">
-                                                        <div class="media align-items-center cust-card py-3 border-bottom">
-                                                            <div class="">
-                                                                <img class="avatar-50 rounded-small" :src="'/assets/images/user/02.jpg'" alt="02">
-                                                            </div>
-                                                            <div class="media-body ml-3">
-                                                                <div
-                                                                    class="d-flex align-items-center justify-content-between">
-                                                                    <h6 class="mb-0">Ashlynn Franci</h6>
-                                                                    <small class="text-dark"><b>11 : 30 pm</b></small>
-                                                                </div>
-                                                                <small class="mb-0">Lorem ipsum dolor sit amet</small>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#" class="iq-sub-card">
-                                                        <div class="media align-items-center cust-card py-3">
-                                                            <div class="">
-                                                                <img class="avatar-50 rounded-small" :src="'/assets/images/user/03.jpg'" alt="03">
-                                                            </div>
-                                                            <div class="media-body ml-3">
-                                                                <div
-                                                                    class="d-flex align-items-center justify-content-between">
-                                                                    <h6 class="mb-0">Kianna Carder</h6>
-                                                                    <small class="text-dark"><b>11 : 21 pm</b></small>
-                                                                </div>
-                                                                <small class="mb-0">Lorem ipsum dolor sit amet</small>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <a class="right-ic btn btn-primary btn-block position-relative p-2" href="#"
-                                                   role="button">
-                                                    View All
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
                                 <li class="nav-item nav-icon dropdown">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -370,7 +269,7 @@
                                                     <h5 class="mb-1">{{ $store.getters.authUser.name }}</h5>
                                                     <p class="mb-0">{{ $store.getters.authUser.email }}</p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
-                                                        <router-link :to="'/profile'" class="btn border mr-2">Profile</router-link>
+                                                        <a :to="'/profile'" class="btn border mr-2">Profile</a>
                                                         <a href="javascript:void(0)" @click="logout" class="btn border">Sign Out</a>
                                                     </div>
                                                 </div>
@@ -384,29 +283,7 @@
                 </nav>
             </div>
         </div>
-        <div class="modal fade" id="new-order" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="popup text-left">
-                            <h4 class="mb-3">New Order</h4>
-                            <div class="content create-workform bg-body">
-                                <div class="pb-3">
-                                    <label class="mb-2">Email</label>
-                                    <input type="text" class="form-control" placeholder="Enter Name or Email">
-                                </div>
-                                <div class="col-lg-12 mt-4">
-                                    <div class="d-flex flex-wrap align-items-ceter justify-content-center">
-                                        <div class="btn btn-primary mr-4" data-dismiss="modal">Cancel</div>
-                                        <div class="btn btn-outline-primary" data-dismiss="modal">Create</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </template>
 
@@ -414,7 +291,7 @@
     export default {
         data() {
             return {
-                menuSlide: false,
+                menuSlide: false
             }
         },
         mounted() {
@@ -423,10 +300,23 @@
         methods:{
             logout() {
                 let _this = this;
+                _this.$store.dispatch("isLoading", true)
                 _this.$store.dispatch("logout");
                 setTimeout(function () {
                     _this.$router.push({ path: `/` });
+                    _this.$store.dispatch("isLoading", false)
                 }, 1000)
+            },
+
+            changeRoute(route) {
+                const _this = this;
+                if (_this.$route.name !== route) {
+                    _this.$store.dispatch("isLoading", true)
+                    setTimeout(function () {
+                        _this.$router.push({ name: route});
+                        _this.$store.dispatch("isLoading", false)
+                    }, 1000)
+                }
             },
 
             menuSlideShow() {
@@ -443,5 +333,8 @@
 <style scoped>
     .menuSlide {
         margin: 0 100px;
+    }
+    .iq-menu li {
+        cursor: pointer;
     }
 </style>

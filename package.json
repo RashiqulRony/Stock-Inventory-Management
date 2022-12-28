@@ -28,6 +28,7 @@
     },
     "dependencies": {
         "moment": "^2.29.1",
+        "vue-barcode": "^1.3.0",
         "vue-laravel-paginate": "^1.0.0",
         "vue-router": "^3.5.1",
         "vue-select": "^3.20.0",

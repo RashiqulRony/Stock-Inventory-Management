@@ -8,7 +8,7 @@
                             <div class="header-title">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h4 class="card-title">Sales</h4>
+                                        <h4 class="card-title">Purchases</h4>
                                     </div>
                                     <div class="col-6">
                                         <router-link class="btn btn-sm btn-primary rounded-pill" style="float: right" :to="'/sale/create'">

@@ -33,6 +33,7 @@ import CustomerCreate       from '../components/customer/Create'
 import CustomerEdit         from '../components/customer/Edit'
 
 import Sale                 from '../components/sale/Index'
+import Purchase                 from '../components/purchase/Index'
 
 const router =  new Router({
     mode: 'history',
@@ -163,6 +164,12 @@ const router =  new Router({
             name: "Sale",
             components: {'default': Sale, 'header': Header, 'footer': Footer},
             meta: {requiresAuth: true, title: 'Sale'}
+        },
+        {
+            path: "/purchase",
+            name: "Purchase",
+            components: {'default': Purchase, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Purchase'}
         },
         {
             path: "/:catchAll(.*)",
