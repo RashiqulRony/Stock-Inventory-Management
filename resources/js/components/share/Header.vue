@@ -1,6 +1,6 @@
 <template>
     <div>
-        <template v-if="$store.getters.isLoading">
+        <template v-if="$store.getters.isLoading" class="mainLoading">
             <div class="loading">
                 <span></span>
                 <span></span>
@@ -39,7 +39,7 @@
                                 <span class="ml-4">Dashboards</span>
                             </a>
                         </li>
-                        <li :class="{active : this.$route.name === 'Category'}">
+                        <li :class="{active : this.$route.name === 'Category' || this.$route.name === 'CategoryCreate' || this.$route.name === 'CategoryEdit' }">
                             <a @click="changeRoute('Category')">
                                 <svg class="svg-icon" id="p-dash3" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -50,7 +50,7 @@
                                 <span class="ml-4">Categories</span>
                             </a>
                         </li>
-                        <li :class="{active : this.$route.name === 'Subcategory'}">
+                        <li :class="{active : this.$route.name === 'Subcategory' || this.$route.name === 'SubcategoryCreate' || this.$route.name === 'SubcategoryEdit'}">
                             <a @click="changeRoute('Subcategory')">
                                 <svg class="svg-icon" id="p-dash3" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -62,7 +62,7 @@
                             </a>
                         </li>
 
-                        <li :class="{active : this.$route.name === 'Brand'}">
+                        <li :class="{active : this.$route.name === 'Brand' || this.$route.name === 'BrandCreate' || this.$route.name === 'BrandEdit'}">
                             <a @click="changeRoute('Brand')" class="">
                                 <svg class="svg-icon" id="p-dash7" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -78,7 +78,7 @@
                         </li>
 
 
-                        <li :class="{active : this.$route.name === 'Product'}">
+                        <li :class="{active : this.$route.name === 'Product' || this.$route.name === 'ProductCreate' || this.$route.name === 'ProductEdit' || this.$route.name === 'ProductView'}">
                             <a @click="changeRoute('Product')">
                                 <svg class="svg-icon" id="p-dash2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -91,7 +91,7 @@
                             </a>
                         </li>
 
-                        <li :class="{active : this.$route.name === 'Purchase'}">
+                        <li :class="{active : this.$route.name === 'Purchase' || this.$route.name === 'PurchaseCreate' || this.$route.name === 'PurchaseEdit'}">
                             <a @click="changeRoute('Purchase')">
                                 <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
@@ -112,7 +112,7 @@
                                 <span class="ml-4">Sale</span>
                             </a>
                         </li>
-                        <li :class="{active : this.$route.name === 'Customer'}">
+                        <li :class="{active : this.$route.name === 'Customer' || this.$route.name === 'CustomerCreate' || this.$route.name === 'CustomerEdit'}">
                             <a @click="changeRoute('Customer')">
                                 <svg class="svg-icon" id="p-dash8" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -174,6 +174,11 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                                <li>
+                                    <a href="" target="_blank" class="btn border add-btn shadow-none mx-2 d-none d-md-block">
+                                        <i class="las la-plus mr-2"></i>New Tab
+                                    </a>
+                                </li>
                                 <li class="nav-item nav-icon dropdown">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -334,7 +339,7 @@
     .menuSlide {
         margin: 0 100px;
     }
-    .iq-menu li {
+    .iq-menu li a{
         cursor: pointer;
     }
 </style>

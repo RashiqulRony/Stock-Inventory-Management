@@ -113,13 +113,16 @@ export default {
     methods:{
 
         getData(page = 1) {
+            this.$store.dispatch("isLoading", true)
             axios.get(Api.product + '?page='+page+'&filter='+this.filter, { headers: store.getters.headers })
                 .then((response) => response.data)
                 .then((response) => {
                     if (response.status === true) {
                         this.allData = response.data
+                        this.$store.dispatch("isLoading", false)
                     } else {
                         this.allData = []
+                        this.$store.dispatch("isLoading", false)
                     }
                 })
                 .catch((error) => {

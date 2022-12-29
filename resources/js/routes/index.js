@@ -33,7 +33,9 @@ import CustomerCreate       from '../components/customer/Create'
 import CustomerEdit         from '../components/customer/Edit'
 
 import Sale                 from '../components/sale/Index'
-import Purchase                 from '../components/purchase/Index'
+
+import Purchase             from '../components/purchase/Index'
+import PurchaseCreate       from '../components/purchase/Create'
 
 const router =  new Router({
     mode: 'history',
@@ -170,6 +172,12 @@ const router =  new Router({
             name: "Purchase",
             components: {'default': Purchase, 'header': Header, 'footer': Footer},
             meta: {requiresAuth: true, title: 'Purchase'}
+        },
+        {
+            path: "/purchase/create",
+            name: "PurchaseCreate",
+            components: {'default': PurchaseCreate, 'header': Header, 'footer': Footer},
+            meta: {requiresAuth: true, title: 'Purchase Create'}
         },
         {
             path: "/:catchAll(.*)",

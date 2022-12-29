@@ -1,5 +1,13 @@
 <template>
     <section class="login-content">
+        <template v-if="$store.getters.isLoading" class="mainLoading">
+            <div class="loading">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </template>
         <div class="container">
             <div class="row align-items-center justify-content-center height-self-center">
                 <div class="col-lg-8">
@@ -79,6 +87,7 @@
 
         methods: {
             login() {
+                this.$store.dispatch("isLoading", true)
                 this.$store.dispatch("login", this.user).then(response => {
                     console.log(response.status)
                     if (response.status === 200) {
@@ -88,9 +97,11 @@
                     } else if (response.error) {
                         this.errors = []
                         this.message = response.error
+                        this.$store.dispatch("isLoading", false)
                     }else {
                         this.message = null
                         this.errors = response.errors
+                        this.$store.dispatch("isLoading", false)
                     }
                 }).catch(error => {
                     console.log(error)

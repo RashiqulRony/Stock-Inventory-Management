@@ -11,7 +11,7 @@
                                         <h4 class="card-title">Purchases</h4>
                                     </div>
                                     <div class="col-6">
-                                        <router-link class="btn btn-sm btn-primary rounded-pill" style="float: right" :to="'/sale/create'">
+                                        <router-link class="btn btn-sm btn-primary rounded-pill" style="float: right" :to="{ name: 'PurchaseCreate'}">
                                             <i class="ri-add-line"></i>
                                             Create
                                         </router-link>

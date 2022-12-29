@@ -84,18 +84,22 @@ export default {
     methods:{
 
         getData() {
+            this.$store.dispatch("isLoading", true)
             axios.get(Api.subcategory, { headers: store.getters.headers })
                 .then((response) => response.data)
                 .then((response) => {
                     if (response.status === true) {
                         this.allData = response.data
+                        this.$store.dispatch("isLoading", false)
                     } else {
                         this.allData = []
+                        this.$store.dispatch("isLoading", false)
                     }
                 })
                 .catch((error) => {
                     this.alertMessage('error', 'Something went wrong. Please try again')
                     console.log(error);
+                    this.$store.dispatch("isLoading", false)
                 });
         },
 
