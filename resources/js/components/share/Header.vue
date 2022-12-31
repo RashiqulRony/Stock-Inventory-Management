@@ -15,8 +15,8 @@
                         <img style="height: 45px" :src="this.assetPath+$store.getters.authUser.logo" class="img-fluid rounded-normal light-logo" :alt="this.domainName">
                     </template>
                     <template v-else>
-                        <img :src="'/assets/images/logo.png'" class="img-fluid rounded-normal light-logo" :alt="this.domainName">
-                        <h5 class="logo-title ml-3">{{ this.domainName }}</h5>
+                        <img :src="'/assets/images/roninve2.png'" style="height: auto!important;" class="img-fluid rounded-normal light-logo" :alt="this.domainName">
+<!--                        <h5 class="logo-title ml-3">{{ this.domainName }}</h5>-->
                     </template>
                 </a>
                 <div @click="menuSlideShow()" class="iq-menu-bt-sidebar ml-0">

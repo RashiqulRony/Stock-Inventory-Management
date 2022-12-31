@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
     <title>RonInve </title>
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <link href="{{ mix('assets/css/all.css') }}" rel="stylesheet">
     <link href="{{ mix('assets/css/custom.css') }}" rel="stylesheet">
 <body class="">
