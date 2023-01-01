@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-    <section class="hero-area hero-style-one bg_cover" style="background-image:url({{ asset('website') }}/images/hero/hero-bg-1.png)">
+    <section class="hero-area hero-style-one bg_cover" style="background-image:url({{ asset('website/images/hero/hero-bg-1.png') }})">
         <div class="hero-shape shape-one scene"><span data-depth="1"></span></div>
         <div class="hero-shape shape-two scene"><span data-depth="2"></span></div>
         <div class="hero-shape shape-three scene"><span data-depth=".5"></span></div>
