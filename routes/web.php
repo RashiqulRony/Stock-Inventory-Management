@@ -14,7 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Auth::routes();
-// User Domain Route
+
+# Website Routes...
+Route::group(['namespace' => 'Website', 'as' => 'web.'], function () {
+    Route::get('/', 'WebController@home')->name('home');
+});
+
+
+
+
+
+# User Domain Route...
 Route::domain('{account}.{domain}.{local}')->group(function(){
     Route::get( '/{vue_route?}', 'DomainController@index')->where( 'vue_route', '(.*)' );
 });

@@ -12,7 +12,7 @@ class DomainController extends Controller
             if (!empty($account)){
                 $domainInfo = User::where('domain', $account)->first();
                 if (!empty($domainInfo)){
-                    return view('user_app');
+                    return view('layouts.user_app');
                 }else{
                     dd('Your store is deactivated');
                 }
@@ -20,7 +20,7 @@ class DomainController extends Controller
                 dd('Your request is invalid');
             }
         }else{
-            return view('welcome');
+            return view('errors.404');
         }
     }
 }
