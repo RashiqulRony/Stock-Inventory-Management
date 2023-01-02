@@ -18,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 # Website Routes...
 Route::group(['namespace' => 'Website', 'as' => 'web.'], function () {
     Route::get('/', 'WebController@home')->name('home');
+    Route::get('about', 'WebController@about')->name('about');
+    Route::get('service', 'WebController@service')->name('service');
+    Route::get('pricing', 'WebController@pricing')->name('pricing');
+    Route::get('blog', 'WebController@blog')->name('blog');
+    Route::get('contact', 'WebController@contact')->name('contact');
 });
 
 

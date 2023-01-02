@@ -17,11 +17,11 @@
                     <nav class="main-menu">
                         <ul>
                             <li class="menu-item"><a href="{{ route('web.home') }}">Home</a></li>
-                            <li class="menu-item"><a href="#">About Us</a></li>
-                            <li class="menu-item"><a href="#">Service</a></li>
-                            <li class="menu-item"><a href="#">Pricing</a></li>
-                            <li class="menu-item"><a href="#">Blog</a></li>
-                            <li class="menu-item"><a href="#">Contact</a></li>
+                            <li class="menu-item"><a href="{{ route('web.about') }}">About Us</a></li>
+                            <li class="menu-item"><a href="{{ route('web.service') }}">Service</a></li>
+                            <li class="menu-item"><a href="{{ route('web.pricing') }}">Pricing</a></li>
+                            <li class="menu-item"><a href="{{ route('web.blog') }}">Blog</a></li>
+                            <li class="menu-item"><a href="{{ route('web.contact') }}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>

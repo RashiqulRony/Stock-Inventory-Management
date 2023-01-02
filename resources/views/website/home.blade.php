@@ -16,6 +16,10 @@
     <meta name="keywords" content="free, inventory, management, software">
 @endsection
 
+@section('_css')
+
+@endsection
+
 @section('content')
     <section class="hero-area hero-style-one bg_cover" style="background-image:url({{ asset('website/images/hero/hero-bg-1.png') }})">
         <div class="hero-shape shape-one scene"><span data-depth="1"></span></div>
@@ -498,3 +502,7 @@
         </div>
     </section>
 @endsection
+
+@push('_js')
+
+@endpush
