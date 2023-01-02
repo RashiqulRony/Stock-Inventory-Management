@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 //Auth::routes();
 
 # Website Routes...
-Route::group(['namespace' => 'Website', 'as' => 'web.'], function () {
+/*Route::group(['namespace' => 'Website', 'as' => 'web.'], function () {
     Route::get('/', 'WebController@home')->name('home');
     Route::get('about', 'WebController@about')->name('about');
     Route::get('service', 'WebController@service')->name('service');
@@ -24,7 +24,7 @@ Route::group(['namespace' => 'Website', 'as' => 'web.'], function () {
     Route::get('blog', 'WebController@blog')->name('blog');
     Route::get('contact', 'WebController@contact')->name('contact');
 });
-
+*/
 
 
 
