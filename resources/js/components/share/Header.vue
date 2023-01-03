@@ -274,7 +274,7 @@
                                                     <h5 class="mb-1">{{ $store.getters.authUser.name }}</h5>
                                                     <p class="mb-0">{{ $store.getters.authUser.email }}</p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
-                                                        <a :to="'/profile'" class="btn border mr-2">Profile</a>
+                                                        <a @click="changeRoute('Profile')" class="btn border mr-2">Profile</a>
                                                         <a href="javascript:void(0)" @click="logout" class="btn border">Sign Out</a>
                                                     </div>
                                                 </div>

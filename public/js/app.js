@@ -7572,7 +7572,7 @@ var render = function render() {
     attrs: {
       id: "today"
     }
-  }, [_vm._v(" " + _vm._s(_vm.today))])])])])]), _vm._v(" "), _vm._m(0)])])]);
+  }, [_vm._v(" " + _vm._s(_vm.today))])])])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -7657,6 +7657,113 @@ var staticRenderFns = [function () {
       "data-percent": "75"
     }
   })])])])])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "col-lg-6"
+  }, [_c("div", {
+    staticClass: "card card-block card-stretch card-height"
+  }, [_c("div", {
+    staticClass: "card-header d-flex justify-content-between"
+  }, [_c("div", {
+    staticClass: "header-title"
+  }, [_c("h4", {
+    staticClass: "card-title"
+  }, [_vm._v("Overview")])]), _vm._v(" "), _c("div", {
+    staticClass: "card-header-toolbar d-flex align-items-center"
+  }, [_c("div", {
+    staticClass: "dropdown"
+  }, [_c("span", {
+    staticClass: "dropdown-toggle dropdown-bg btn",
+    attrs: {
+      id: "dropdownMenuButton001",
+      "data-toggle": "dropdown"
+    }
+  }, [_vm._v("\n                                This Month"), _c("i", {
+    staticClass: "ri-arrow-down-s-line ml-1"
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "dropdown-menu dropdown-menu-right shadow-none",
+    attrs: {
+      "aria-labelledby": "dropdownMenuButton001"
+    }
+  }, [_c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Year")]), _vm._v(" "), _c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Month")]), _vm._v(" "), _c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Week")])])])])]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("div", {
+    attrs: {
+      id: "layout1-chart1"
+    }
+  })])])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "col-lg-6"
+  }, [_c("div", {
+    staticClass: "card card-block card-stretch card-height"
+  }, [_c("div", {
+    staticClass: "card-header d-flex align-items-center justify-content-between"
+  }, [_c("div", {
+    staticClass: "header-title"
+  }, [_c("h4", {
+    staticClass: "card-title"
+  }, [_vm._v("Revenue Vs Cost")])]), _vm._v(" "), _c("div", {
+    staticClass: "card-header-toolbar d-flex align-items-center"
+  }, [_c("div", {
+    staticClass: "dropdown"
+  }, [_c("span", {
+    staticClass: "dropdown-toggle dropdown-bg btn",
+    attrs: {
+      id: "dropdownMenuButton002",
+      "data-toggle": "dropdown"
+    }
+  }, [_vm._v("\n                                This Month"), _c("i", {
+    staticClass: "ri-arrow-down-s-line ml-1"
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "dropdown-menu dropdown-menu-right shadow-none",
+    attrs: {
+      "aria-labelledby": "dropdownMenuButton002"
+    }
+  }, [_c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Yearly")]), _vm._v(" "), _c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Monthly")]), _vm._v(" "), _c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Weekly")])])])])]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("div", {
+    staticStyle: {
+      "min-height": "360px"
+    },
+    attrs: {
+      id: "layout1-chart-2"
+    }
+  })])])]);
 }];
 render._withStripped = true;
 
@@ -12227,8 +12334,10 @@ var render = function render() {
     staticClass: "d-flex align-items-center justify-content-center mt-3"
   }, [_c("a", {
     staticClass: "btn border mr-2",
-    attrs: {
-      to: "/profile"
+    on: {
+      click: function click($event) {
+        return _vm.changeRoute("Profile");
+      }
     }
   }, [_vm._v("Profile")]), _vm._v(" "), _c("a", {
     staticClass: "btn border",
@@ -22777,7 +22886,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.LCD > div[data-v-040e2ab9] {\r\n    font-family: cursive;\r\n    font-size: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.LCD > div[data-v-040e2ab9] {\n    font-family: cursive;\n    font-size: 40px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22801,7 +22910,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-3bd692e4]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-3bd692e4]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22825,7 +22934,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-2bb9aa6f]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-2bb9aa6f]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22849,7 +22958,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-61c7bb3d]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-61c7bb3d]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22873,7 +22982,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-029d8d52]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-029d8d52]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22897,7 +23006,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-30fcfae0]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-30fcfae0]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22921,7 +23030,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-04fb831c]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-04fb831c]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22945,7 +23054,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-4cc91800]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-4cc91800]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22969,7 +23078,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-c3879172]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-c3879172]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22993,7 +23102,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-5e90c3d6]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-5e90c3d6]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23017,7 +23126,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-8efcb5a0]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-8efcb5a0]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23065,7 +23174,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-4cc0bfd0]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-4cc0bfd0]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23089,7 +23198,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-a65df1b4]{\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 1;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.custom-file-label[data-v-a65df1b4]{\n    display: -webkit-box;\n    -webkit-line-clamp: 1;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -27,7 +27,7 @@
                 </div>
                 <div class="header-right-nav">
                     <ul class="d-inline-flex align-items-center">
-                        <li class="nav-button"><a href="#" class="main-btn bordered-btn">Free Trial</a></li>
+                        <li class="nav-button"><a href="{{ route('web.register') }}" class="main-btn bordered-btn">Free Trial</a></li>
                         <li class="nav-toggle-btn">
                             <div class="navbar-toggler">
                                 <span></span>

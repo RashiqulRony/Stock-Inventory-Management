@@ -31,3 +31,15 @@ if (!function_exists('getDomainAuthInfo')) {
         return $data;
     }
 }
+
+if (!function_exists('removeHttp')) {
+    function removeHttp($url) {
+        $disallowed = array('http://', 'https://', 'www.');
+        foreach($disallowed as $d) {
+            if(strpos($url, $d) === 0) {
+                return str_replace($d, '', $url);
+            }
+        }
+        return $url;
+    }
+}

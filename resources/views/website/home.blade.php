@@ -30,7 +30,7 @@
                 <div class="col-lg-8">
                     <div class="hero-content text-center">
                         <h1 data-aos="fade-up">In the world of SaaS business</h1>
-                        <a href="about.html" class="main-btn btn-white" data-aos="fade-up">Read More</a>
+                        <a href="{{ route('web.about') }}" class="main-btn btn-white" data-aos="fade-up">Read More</a>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                         <div class="shape shape-one scene">
                             <span data-depth="3"><img src="{{ asset('website') }}/images/shape/object-1.png" alt="object"></span>
                         </div>
-                        <img src="{{ asset('website') }}/images/block/img-1.jpg" class="img-one animate-float-y" alt="">
+                        <img src="{{ asset('website') }}/images/block/ss1.png" class="img-one animate-float-y" alt="">
                         <img src="{{ asset('website') }}/images/block/img-2.jpg" class="img-two animate-float-x" alt="">
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         <div class="shape shape-one scene">
                             <span data-depth="4"><img src="{{ asset('website') }}/images/shape/object-1.png" alt="object"></span>
                         </div>
-                        <img src="{{ asset('website') }}/images/block/img-1.jpg" class="img-one animate-float-y" alt="">
+                        <img src="{{ asset('website') }}/images/block/ss1.png" class="img-one animate-float-y" alt="">
                         <img src="{{ asset('website') }}/images/block/img-2.jpg" class="img-two animate-float-X" alt="">
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                             <li class="bg-one">Responsive layout</li>
                             <li class="bg-two">Easy to customizations & update</li>
                         </ul>
-                        <a href="about.html" class="main-btn bordered-btn bordered-blue">Load More</a>
+                        <a href="{{ route('web.about') }}" class="main-btn bordered-btn bordered-blue">Load More</a>
                     </div>
                 </div>
             </div>
