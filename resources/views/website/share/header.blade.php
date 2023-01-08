@@ -22,6 +22,7 @@
                             <li class="menu-item"><a href="{{ route('web.pricing') }}">Pricing</a></li>
                             <li class="menu-item"><a href="{{ route('web.blog') }}">Blog</a></li>
                             <li class="menu-item"><a href="{{ route('web.contact') }}">Contact</a></li>
+                            <li class="menu-item"><a href="">Track Panel</a></li>
                         </ul>
                     </nav>
                 </div>

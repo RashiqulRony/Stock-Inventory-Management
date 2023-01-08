@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 //Auth::routes();
 
+
+# User Domain Route...
+Route::domain('{account}.{domain}.{local}')->group(function(){
+    Route::get( '/{vue_route?}', 'DomainController@index')->where( 'vue_route', '(.*)' );
+});
+
 # Website Routes...
 Route::group(['namespace' => 'Website', 'as' => 'web.'], function () {
     Route::get('/', 'WebController@home')->name('home');
@@ -27,11 +33,3 @@ Route::group(['namespace' => 'Website', 'as' => 'web.'], function () {
     Route::post('register-user', 'WebController@userRegister')->name('userRegister');
 });
 
-
-
-
-
-# User Domain Route...
-Route::domain('{account}.{domain}.{local}')->group(function(){
-    Route::get( '/{vue_route?}', 'DomainController@index')->where( 'vue_route', '(.*)' );
-});

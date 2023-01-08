@@ -32,7 +32,8 @@
                 <div class="card-body">
                     <form class="form-horizontal">
                         <div class="row">
-
+                            <InputTag v-model="tags" class="form-control" style="line-height: 35px;" />
+                            {{ tags }}
                         </div>
                     </form>
                 </div>
@@ -44,15 +45,18 @@
 <script>
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
+import InputTag from "../share/InputTag";
 
 export default {
     components: {
         vSelect,
+        InputTag
     },
 
     data() {
         return {
             errors: [],
+            tags: []
         };
     },
 

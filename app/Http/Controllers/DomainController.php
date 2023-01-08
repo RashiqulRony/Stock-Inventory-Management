@@ -20,7 +20,7 @@ class DomainController extends Controller
                 dd('Your request is invalid');
             }
         }else{
-            return view('errors.404');
+            return view('website.home');
         }
     }
 }

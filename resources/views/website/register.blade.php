@@ -22,6 +22,11 @@
         margin-bottom: 0!important;
         margin-top: 20px!important;
     }
+
+    .contact-form form .form_control {
+        background-color: #e7e7e7;
+        border: 1px solid #ccc;
+    }
 </style>
 @endsection
 
@@ -52,68 +57,81 @@
             <div class="contact-wrapper" data-aos="fade-up" data-aos-delay="20">
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
+                        @if (session('success'))
+                            <div class="alert alert-success text-center" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @elseif(session('error'))
+                            <div class="alert alert-danger text-center" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="section-title text-center mb-35">
                             <h2>Your Information</h2>
                         </div>
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form action="{{ route('web.userRegister') }}" method="post">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form_group">
-                                    <input type="text" class="form_control" placeholder="Domain Name*" name="domain" required>
-                                    @error('domain')
-                                        <strong class="text-danger">{{ $message }}</strong>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form_group">
-                                    <input type="text" class="form_control" placeholder="Full Name*" name="name" required>
-                                    @error('name')
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form_group">
-                                    <input type="text" class="form_control" placeholder="Phone Number*" name="phone" required>
-                                    @error('phone')
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form_group">
-                                    <input type="email" class="form_control" placeholder="Email*" name="email" required>
-                                    @error('email')
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form_group">
-                                    <input type="password" class="form_control" placeholder="Password*" name="password" required>
-                                    @error('password')
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form_group">
-                                    <input type="password" class="form_control" placeholder="Confirm Password*" name="password_confirmation" required>
-                                </div>
-                            </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('web.userRegister') }}" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form_group">
+                                            <input type="text" class="form_control" value="{{ old('domain') }}" placeholder="Domain Name*" name="domain" required>
+                                            @error('domain')
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form_group">
+                                            <input type="text" class="form_control" value="{{ old('name') }}" placeholder="Full Name*" name="name" required>
+                                            @error('name')
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form_group">
+                                            <input type="text" class="form_control" value="{{ old('phone') }}" placeholder="Phone Number*" name="phone" required>
+                                            @error('phone')
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form_group">
+                                            <input type="email" class="form_control" value="{{ old('email') }}" placeholder="Email*" name="email" required>
+                                            @error('email')
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form_group">
+                                            <input type="password" class="form_control" placeholder="Password*" name="password" required>
+                                            @error('password')
+                                                <strong class="text-danger">{{ $message }}</strong>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form_group">
+                                            <input type="password" class="form_control" placeholder="Confirm Password*" name="password_confirmation" required>
+                                        </div>
+                                    </div>
 
-                            <div class="col-lg-12">
-                                <div class="form_group text-center mt-3">
-                                    <button class="main-btn btn-gradient-yellow">Register</button>
+                                    <div class="col-lg-12">
+                                        <div class="form_group text-center mt-3">
+                                            <button class="main-btn btn-gradient-yellow">Register</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -41,7 +41,7 @@ class WebController extends Controller
 
     public function userRegister (Request $request) {
         $this->validate($request, [
-            'domain'    => 'required|max:20|unique:users',
+            'domain'    => 'required|alpha_num|max:20|unique:users',
             'name'      => 'required|max:191',
             'email'     => 'required|email|max:191|unique:users',
             'phone'     => 'required|max:15|unique:users',
@@ -50,10 +50,11 @@ class WebController extends Controller
 
         try {
            $user = User::create([
-                'domain'            => $request->domain,
+                'domain'            => strtolower($request->domain),
                 'name'              => $request->name,
                 'email'             => $request->email,
                 'phone'             => $request->phone,
+                'status'            => "Active",
                 'password'          => Hash::make($request->password),
                 'email_verified_at' => now(),
             ]);
