@@ -39,7 +39,7 @@ class AuthController extends Controller
         }
 
         try {
-            $credentials = $request->only('email', 'password', 'domain');
+            $credentials = $request->only('email', 'password');
             if (!$token = auth('api')->attempt($credentials)) {
                 return response()->json(['status'=> false, 'error' => 'Unauthorized']);
             }

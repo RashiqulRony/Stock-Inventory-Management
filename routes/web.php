@@ -14,22 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Auth::routes();
-
-
 # User Domain Route...
-Route::domain('{account}.{domain}.{local}')->group(function(){
+Route::domain(env('SUB_URL'))->group(function () {
     Route::get( '/{vue_route?}', 'DomainController@index')->where( 'vue_route', '(.*)' );
 });
 
 # Website Routes...
-Route::group(['namespace' => 'Website', 'as' => 'web.'], function () {
-    Route::get('/', 'WebController@home')->name('home');
-    Route::get('about', 'WebController@about')->name('about');
-    Route::get('service', 'WebController@service')->name('service');
-    Route::get('pricing', 'WebController@pricing')->name('pricing');
-    Route::get('blog', 'WebController@blog')->name('blog');
-    Route::get('contact', 'WebController@contact')->name('contact');
-    Route::get('register', 'WebController@register')->name('register');
-    Route::post('register-user', 'WebController@userRegister')->name('userRegister');
+Route::domain(env('MAIN_URL'))->group(function() {
+    Route::group(['namespace' => 'Website', 'as' => 'web.'], function () {
+        Route::get('/', 'WebController@home')->name('home');
+        Route::get('about', 'WebController@about')->name('about');
+        Route::get('service', 'WebController@service')->name('service');
+        Route::get('pricing', 'WebController@pricing')->name('pricing');
+        Route::get('blog', 'WebController@blog')->name('blog');
+        Route::get('contact', 'WebController@contact')->name('contact');
+        Route::get('register', 'WebController@register')->name('register');
+        Route::post('register-user', 'WebController@userRegister')->name('userRegister');
+    });
 });
+
+
+
 
