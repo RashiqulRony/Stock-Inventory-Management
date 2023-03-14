@@ -11,11 +11,9 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 window.store = store;
 window.Api = Api;
-
-var parts = location.hostname.split('.');
-var domainName = parts.shift();
-Vue.prototype.domainName = domainName;
-Vue.prototype.assetPath = `/storage/${domainName}/`;
+if (window.store.getters.isLoggedIn === true) {
+    Vue.prototype.assetPath = `/storage/${window.store.getters.authUser.username}/`;
+}
 Vue.prototype.mainDomain = location.hostname;
 Vue.use(VueSweetalert2);
 

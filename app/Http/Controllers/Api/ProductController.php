@@ -18,8 +18,8 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        $this->_filePath = auth('api')->user()->domain.'/product';
-        $this->_productVariants = auth('api')->user()->domain.'/product/variant';
+        $this->_filePath = auth('api')->user()->username.'/product';
+        $this->_productVariants = auth('api')->user()->username.'/product/variant';
         $this->_authUser = auth('api')->user();
     }
 

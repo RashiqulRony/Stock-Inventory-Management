@@ -16,7 +16,7 @@ class BrandController extends Controller
 
     public function __construct()
     {
-        $this->_filePath = auth('api')->user()->domain.'/brand';
+        $this->_filePath = auth('api')->user()->username.'/brand';
         $this->_authUser = auth('api')->user();
     }
 

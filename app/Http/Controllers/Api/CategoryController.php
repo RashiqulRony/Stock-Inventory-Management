@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        $this->_filePath = auth('api')->user()->domain.'/category';
+        $this->_filePath = auth('api')->user()->username.'/category';
         $this->_authUser = auth('api')->user();
     }
 

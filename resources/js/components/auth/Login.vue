@@ -72,7 +72,6 @@
                 user: {
                     email: '',
                     password: '',
-                    domain: this.domainName,
                 },
                 errors: [],
                 message: null

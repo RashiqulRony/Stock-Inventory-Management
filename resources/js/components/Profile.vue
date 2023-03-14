@@ -12,9 +12,9 @@
                         <div class="card-body">
                             <form class="form-horizontal" @submit.prevent="profileUpdate()">
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-3 align-self-center" for="domain">Domain:</label>
+                                    <label class="control-label col-sm-3 align-self-center" for="domain">Username:</label>
                                     <div class="col-sm-9">
-                                        <input type="text" :value="this.mainDomain" readonly disabled class="form-control" id="domain" placeholder="Enter your name">
+                                        <input type="text" :value="$store.getters.authUser.username" readonly disabled class="form-control" id="domain" placeholder="Enter your name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -130,7 +130,6 @@ export default {
     data() {
         return {
             user: {
-                domain: this.domainName,
                 name: this.$store.getters.authUser.name,
                 email: this.$store.getters.authUser.email,
                 phone: this.$store.getters.authUser.phone,

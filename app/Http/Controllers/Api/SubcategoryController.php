@@ -17,7 +17,7 @@ class SubcategoryController extends Controller
 
     public function __construct()
     {
-        $this->_filePath = auth('api')->user()->domain.'/subcategory';
+        $this->_filePath = auth('api')->user()->username.'/subcategory';
         $this->_authUser = auth('api')->user();
     }
 

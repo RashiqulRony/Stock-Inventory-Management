@@ -12,11 +12,11 @@
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
                 <a :href="'/dashboard'" class="header-logo">
                     <template v-if="$store.getters.authUser.logo">
-                        <img style="height: 45px" :src="this.assetPath+$store.getters.authUser.logo" class="img-fluid rounded-normal light-logo" :alt="this.domainName">
+                        <img style="height: 45px" :src="this.assetPath+$store.getters.authUser.logo" class="img-fluid rounded-normal light-logo" :alt="$store.getters.authUser.username">
                     </template>
                     <template v-else>
-                        <img :src="'/assets/images/roninve2.png'" style="height: auto!important;" class="img-fluid rounded-normal light-logo" :alt="this.domainName">
-<!--                        <h5 class="logo-title ml-3">{{ this.domainName }}</h5>-->
+                        <img :src="'/assets/images/roninve2.png'" style="height: auto!important;" class="img-fluid rounded-normal light-logo" :alt="$store.getters.authUser.username">
+<!--                        <h5 class="logo-title ml-3">{{ $store.getters.authUser.username }}</h5>-->
                     </template>
                 </a>
                 <div @click="menuSlideShow()" class="iq-menu-bt-sidebar ml-0">
@@ -154,11 +154,11 @@
                         <i class="ri-menu-line wrapper-menu"></i>
                         <a :href="'/dashboard'" class="header-logo">
                             <template v-if="$store.getters.authUser.logo">
-                                <img style="height: 45px" :src="this.assetPath+$store.getters.authUser.logo" class="img-fluid rounded-normal" :alt="this.domainName">
+                                <img style="height: 45px" :src="this.assetPath+$store.getters.authUser.logo" class="img-fluid rounded-normal" :alt="$store.getters.authUser.username">
                             </template>
                             <template v-else>
-                                <img :src="'/assets/images/logo.png'" class="img-fluid rounded-normal" :alt="this.domainName">
-                                <h5 class="logo-title ml-3">{{ this.domainName }}</h5>
+                                <img :src="'/assets/images/logo.png'" class="img-fluid rounded-normal" :alt="$store.getters.authUser.username">
+                                <h5 class="logo-title ml-3">{{ $store.getters.authUser.username }}</h5>
                             </template>
 
                         </a>

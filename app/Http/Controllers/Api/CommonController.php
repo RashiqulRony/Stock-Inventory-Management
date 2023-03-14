@@ -40,13 +40,13 @@ class CommonController extends Controller
             }
 
             if ($request->hasFile('avatar')) {
-                $this->imageAndFileDelete($user->domain, $this->_authUser->avatar, '');
-                $file = $this->imageUpload($request->file('avatar'), $user->domain, '');
+                $this->imageAndFileDelete($user->username, $this->_authUser->avatar, '');
+                $file = $this->imageUpload($request->file('avatar'), $user->username, '');
                 $avatar = $file['name'];
             }
             if ($request->hasFile('logo')) {
-                $this->imageAndFileDelete($user->domain, $this->_authUser->logo, '');
-                $file = $this->imageUpload($request->file('logo'), $user->domain, '');
+                $this->imageAndFileDelete($user->username, $this->_authUser->logo, '');
+                $file = $this->imageUpload($request->file('logo'), $user->username, '');
                 $logo = $file['name'];
             }
 

@@ -15,7 +15,7 @@ class SaleController extends Controller
 
     public function __construct()
     {
-        $this->_filePath = auth('api')->user()->domain.'/sale';
+        $this->_filePath = auth('api')->user()->username.'/sale';
         $this->_authUser = auth('api')->user();
     }
 

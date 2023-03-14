@@ -16,7 +16,7 @@ class CustomerController extends Controller
 
     public function __construct()
     {
-        $this->_filePath = auth('api')->user()->domain.'/customer';
+        $this->_filePath = auth('api')->user()->username.'/customer';
         $this->_authUser = auth('api')->user();
     }
 

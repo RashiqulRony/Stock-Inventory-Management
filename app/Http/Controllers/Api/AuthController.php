@@ -75,7 +75,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('name', 'email', 'password', 'domain', 'phone', 'password_confirmation');
         $rules = [
-            'domain'    => 'required|max:20|unique:users',
+            'username'  => 'required|max:20|unique:users',
             'name'      => 'required|max:191',
             'email'     => 'required|email|max:191|unique:users',
             'phone'     => 'required|max:15|unique:users',
@@ -88,7 +88,7 @@ class AuthController extends Controller
                 return response()->json(['status' => false, 'errors'=> $validator->messages()]);
             }
             User::create([
-                'domain'            => $request->domain,
+                'username'          => $request->username,
                 'name'              => $request->name,
                 'email'             => $request->email,
                 'phone'             => $request->phone,
